@@ -1,4 +1,6 @@
 # mysql>
+
+
 ```mysql 
 <!-- 18|11|2024 -->
 show databases;
@@ -25,6 +27,13 @@ insert into ED_RECORD values(116,"SURAJ","OPERATIONS",83000,2700,40);
 insert into ED_RECORD values(117,"GILL","SALES",34000,NULL,50);
 insert into ED_RECORD values(118,"SAURABH","OPERATIONS",41200,0,50);
 insert into ED_RECORD values(119,"ASHISH","MANAGER",53470,3700,60);
+
+
+<!-- Add Clause in sql -->
+
+
+<!-- Add operators in sql -->
+
 
 <!-- 21|11|24 -->
 
@@ -76,4 +85,5 @@ select name from ED_RECORD where name like "%A";
 select name from ED_RECORD where name like "____";
 select name from ED_RECORD where name like "_H";
 select name from ED_RECORD where name like "%EE%";
+<!-- escape charecters (they dosen't print on terminal) = % & __ -->
 ```
