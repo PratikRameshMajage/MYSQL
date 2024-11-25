@@ -86,6 +86,7 @@ select name from ED_RECORD where name like "%EE%";
 ```
 
 ```sql
+<!-- 25|11|24 -->
 select sysdate();
 2024-11-25 16:32:47
 select date("2024-11-25");
