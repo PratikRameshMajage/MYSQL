@@ -682,3 +682,165 @@ delete from student; all data removed.
 -- foreign key:
 
 ```
+```sql
+-- 28|11|24 FG
+create database test;
+drop database test;
+use test;
+
+use sqlsession;
+select * from students;
+select * from result;
+insert into result values(101, 80, "p", 1);
+delete from result where id=101;
+
+desc students;
+desc result;
+
+-- 28|11|24
+-- cascading: give delete permissioons on table on parent child relationship
+-- on cascade delete
+-- on cascade set null
+drop table test1;
+drop table test2;
+
+create table test2(
+id int,
+name varchar(20),
+constraint fk1 foreign key (id) references test1(id)
+-- on delete cascade
+on delete set null
+);
+
+create table test1(
+id int primary key,
+name varchar(20)
+);
+
+insert into test2 values(1,"p");
+insert into test2 values(2,"ramesh");
+insert into test2 values(3,"archana");
+insert into test2 values(4,"pragati");
+
+delete from test1 where id=1;
+
+select * from test1;
+select * from test2;
+
+desc test1;
+desc test2;
+
+-- projection select all data
+-- selection use where clause
+-- distict unique values
+
+select distict name from data1;
+select distict name, branch from data;
+
+-- alias: as
+select 10+5 as addition;
+select first_name as fn from data1;
+select first_name fn from data1;
+
+-- order by: asc desc
+select * from employees order by salary desc;
+-- limit
+select * from data1 limit 3;
+-- offset: skip starting values
+select * from employee limit 10 offset 5;
+select * from data1 limit 5,10;
+-- highest sallary top3 values
+select salary from employee order by salary desc limit 5;
+-- 2nd highest vallue
+select salary from employee order by salary desc limit 1,1;
+select salary from employee order by salary desc limit 2,1;
+select salary from employee order by salary desc limit 4,1;
+
+```
+
+```sql SMIT
+-- 28|11|24
+use mysql;
+create table dept(deptno int, dname varchar(20), loc varchar(20));
+insert into dept(deptno, dname, loc) values(10, "mechanical", "mumbai");
+insert into dept(deptno, dname, loc) values(20, "computer", "pune");
+insert into dept(deptno, dname, loc) values(20, "computer", "pune");
+insert into dept(deptno, dname, loc) values(30, "civil", "banglore");
+insert into dept(deptno, dname, loc) values(40, "entc", "chennai");
+insert into dept(deptno, dname, loc) values(60, "electric", "tamil_nadu");
+insert into dept(deptno, dname, loc) values(70, "chemical", "panjabi");
+insert into dept(deptno, dname, loc) values(80, "education", "karnataka");
+insert into dept(deptno, dname, loc) values(90, "art", "rajasthan");
+select * from dept;
++--------+------------+------------+
+| deptno | dname      | loc        |
++--------+------------+------------+
+|     10 | mechanical | mumbai     |
+|     10 | mechanical | mumbai     |
+|     20 | computer   | pune       |
+|     20 | computer   | pune       |
+|     30 | civil      | banglore   |
+|     40 | entc       | chennai    |
+|     50 | it         | mp         |
+|     60 | electric   | tamil_nadu |
+|     70 | chemical   | panjabi    |
+|     80 | education  | karnataka  |
+|     90 | art        | rajasthan  |
++--------+------------+------------+
+
+
+
+```sql
+select * from ed_record where salary = (select max(salary) from ed_record where deptno in (select deptno from dept wher dname="computer");
+select name from ed_record where deptno in (select deptno from dept where dname in (select deptno from ed_record where name ="shalaka")));
+```
+
+```sql
+28|11|24
+use mysql;
+create table dept(deptno int, dname varchar(20), loc varchar(20));
+insert into dept(deptno, dname, loc) values(10, "mechanical", "mumbai");
+insert into dept(deptno, dname, loc) values(10, "mechanical", "mumbai");
+insert into dept(deptno, dname, loc) values(20, "computer", "pune");
+insert into dept(deptno, dname, loc) values(50, "it", "mp");
+insert into dept(deptno, dname, loc) values(60, "electric", "tamil_nadu");
+insert into dept(deptno, dname, loc) values(70, "chemical", "panjabi");
+insert into dept(deptno, dname, loc) values(80, "education", "karnataka");
+insert into dept(deptno, dname, loc) values(90, "art", "rajasthan");
+select * from dept;
++--------+------------+------------+
+| deptno | dname      | loc        |
++--------+------------+------------+
+|     10 | mechanical | mumbai     |
+|     10 | mechanical | mumbai     |
+|     20 | computer   | pune       |
+|     20 | computer   | pune       |
+|     30 | civil      | banglore   |
+|     40 | entc       | chennai    |
+|     50 | it         | mp         |
+|     60 | electric   | tamil_nadu |
+|     70 | chemical   | panjabi    |
+|     80 | education  | karnataka  |
+|     90 | art        | rajasthan  |
++--------+------------+------------+
+select * from ed_record;
+select name from ed_record where deptno in (select deptno from dept where dname like "%c");
+select deptno from ed_record where name = "swapnil";
+select deptno from ed_record where name = "shirin";
+select * from dept;
+select name from ed_record where deptno in (select deptno from dept where dname like "C%");
+select deptno from ed_record where name = "suresh";
+select name from ed_record where deptno in (select deptno from dept where dname like "%l");
+select name from ed_record where deptno in (select deptno from dept where dname like "l%");
+select * from dept;
+select * from ed_record;
+select max(salary) from ed_record;
+select min(comm) from ed_record;
+select deptno from ed_record where comm=0;
+select dname from dept where deptno in (select deptno from ed_record where comm=(select min(comm) from ed_record));
+select dname from dept where deptno in (select deptno from ed_record where salary=(select min(salary) from ed_record));
+select select * from dept;
+select name from ed_record where deptno in (select deptno from dept where dname = "mechanical");
+select name from ed_record where name = "gill";
+select * from ed_record where deptno in (select deptno from dept where loc in (select loc from dept where deptno in (select deptno from ed_record where name="gill")));
+```
