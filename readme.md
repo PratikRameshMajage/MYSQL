@@ -29,7 +29,6 @@ insert into ED_RECORD values(119,"ASHISH","MANAGER",53470,3700,60);
 
 <!-- Add Clause in sql -->
 
-
 <!-- Add operators in sql -->
 
 ```sql
@@ -80,7 +79,7 @@ select name from ED_RECORD where name like "A%";
 select name from ED_RECORD where name like "S%";
 select name from ED_RECORD where name like "%A";
 select name from ED_RECORD where name like "____";
-select name from ED_RECORD where name like "_H";
+select name from ED_RECORD where name like "_H%";
 select name from ED_RECORD where name like "%EE%";
 <!-- escape charecters (they dosen't print on terminal) = % & __ -->
 ```
@@ -214,8 +213,8 @@ select count(ID), DEPTNO from ED_RECORD group by DEPTNO;
 |         4 |     40 |
 |         2 |     50 |
 |         1 |     60 |
- select max(SALARY), DEPTNO from ED_RECORD group by DEPTNO;
- | max(SALARY) | DEPTNO |
+select max(SALARY), DEPTNO from ED_RECORD group by DEPTNO;
+| max(SALARY) | DEPTNO |
 +-------------+--------+
 |      100000 |     20 |
 |      150000 |     10 |
@@ -1081,4 +1080,312 @@ select * from borrowed_books;
 |       303 |     103 |       203 | 2024-11-03  | 2024-11-17 | 2024-11-17  |
 |       304 |     104 |       201 | 2024-11-04  | 2024-11-18 | 2024-11-18  |
 +-----------+---------+-----------+-------------+------------+-------------+
+```
+
+```sql
+-- 29|11|24
+show databases; 
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| lenden             |
+| library_management |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sqlsession         |
+| sys                |
+| world              |
++--------------------+
+use mysql;
+show tables;
++------------------------------------------------------+
+| Tables_in_mysql                                      |
++------------------------------------------------------+
+| columns_priv                                         |
+| component                                            |
+| data3                                                |
+| db                                                   |
+| default_roles                                        |
+| dept                                                 |
+| ed_record                                            |
+| engine_cost                                          |
+| func                                                 |
+| general_log                                          |
+| global_grants                                        |
+| gtid_executed                                        |
+| help_category                                        |
+| help_keyword                                         |
+| help_relation                                        |
+| help_topic                                           |
+| innodb_index_stats                                   |
+| innodb_table_stats                                   |
+| ndb_binlog_index                                     |
+| password_history                                     |
+| plugin                                               |
+| procs_priv                                           |
+| proxies_priv                                         |
+| replication_asynchronous_connection_failover         |
+| replication_asynchronous_connection_failover_managed |
+| replication_group_configuration_version              |
+| replication_group_member_actions                     |
+| role_edges                                           |
+| server_cost                                          |
+| servers                                              |
+| slave_master_info                                    |
+| slave_relay_log_info                                 |
+| slave_worker_info                                    |
+| slow_log                                             |
+| tables_priv                                          |
+| time_zone                                            |
+| time_zone_leap_second                                |
+| time_zone_name                                       |
+| time_zone_transition                                 |
+| time_zone_transition_type                            |
+| user                                                 |
++------------------------------------------------------+
+select * from ed_record;
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
++------+----------+------------+--------+------+--------+
+select * from dept;
++--------+------------+------------+
+| deptno | dname      | loc        |
++--------+------------+------------+
+|     10 | mechanical | mumbai     |
+|     10 | mechanical | mumbai     |
+|     20 | computer   | pune       |
+|     20 | computer   | pune       |
+|     30 | civil      | banglore   |
+|     40 | entc       | chennai    |
+|     50 | it         | mp         |
+|     60 | electric   | tamil_nadu |
+|     70 | chemical   | panjabi    |
+|     80 | education  | karnataka  |
+|     90 | art        | rajasthan  |
++--------+------------+------------+
+select * from ed_record where deptno = "10";
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
++------+----------+------------+--------+------+--------+
+select deptno from ed_record where name = "shrutika";
++--------+
+| deptno |
++--------+
+|     10 |
++--------+
+select loc from dept where deptno in(select deptno from ed_record where name = "shrutika");
++--------+
+| loc    |
++--------+
+| mumbai |
+| mumbai |
++--------+
+select loc from dept where deptno in(select deptno from ed_record where name = "shrutika");
++--------+
+| loc    |
++--------+
+| mumbai |
+| mumbai |
++--------+
+select deptno from dept where loc in(select loc from dept where deptno in(select deptno from ed_record where name = "shrutika"));
++--------+
+| deptno |
++--------+
+|     10 |
+|     10 |
++--------+
+select * from ed_record where deptno in (select deptno from dept where loc in(select loc from dept where deptno in(select deptno from ed_record where name = "shrutika")));
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
++------+----------+------------+--------+------+--------+
+select * from ed_record where deptno in (select deptno from dept where loc in(select loc from dept where deptno in(select deptno from ed_record where name = "shrutika")));
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
++------+----------+------------+--------+------+--------+
+select * from ed_record where name = "smruti";
++------+--------+---------+--------+------+--------+
+| ID   | NAME   | JOB     | SALARY | COMM | DEPTNO |
++------+--------+---------+--------+------+--------+
+|  111 | SMRUTI | QUALITY |  55000 | 2500 |     30 |
++------+--------+---------+--------+------+--------+
+select * from ed_record where job != (select job from ed_record where name = "smruti") and salary > (select salary from ed_record where name = "rohit");
++------+----------+---------+--------+------+--------+
+| ID   | NAME     | JOB     | SALARY | COMM | DEPTNO |
++------+----------+---------+--------+------+--------+
+|  105 | SHRUTIKA | MANAGER | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES   | 130000 | 3500 |     10 |
+|  109 | JEET     | MANAGER | 155000 | 4500 |     30 |
+|  109 | JEET     | MANAGER | 155000 | 4500 |     30 |
++------+----------+---------+--------+------+--------+
+(select salary from ed_record where name = "saurabh");
++--------+
+| salary |
++--------+
+|  41200 |
++--------+
+select * from ed_record where name = "gauri";
++------+-------+------------+--------+------+--------+
+| ID   | NAME  | JOB        | SALARY | COMM | DEPTNO |
++------+-------+------------+--------+------+--------+
+|  104 | GAURI | OPERATIONS |  80000 | 3500 |     20 |
++------+-------+------------+--------+------+--------+
+select deptno from ed_record where deptno in (select deptno from ed_record where name = "gauri");
++--------+
+| deptno |
++--------+
+|     20 |
+|     20 |
+|     20 |
+|     20 |
++--------+
+select * from dept where dname = "computer";
++--------+----------+------+
+| deptno | dname    | loc  |
++--------+----------+------+
+|     20 | computer | pune |
+|     20 | computer | pune |
++--------+----------+------+
+select * from dept where dname = "mechanical";
++--------+------------+--------+
+| deptno | dname      | loc    |
++--------+------------+--------+
+|     10 | mechanical | mumbai |
+|     10 | mechanical | mumbai |
++--------+------------+--------+
+select * from ed_record where deptno in (select deptno from dept where dname in ("computer", "mechanical"));
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
++------+----------+------------+--------+------+--------+
+select * from ed_record where name = "jeet";
++------+------+---------+--------+------+--------+
+| ID   | NAME | JOB     | SALARY | COMM | DEPTNO |
++------+------+---------+--------+------+--------+
+|  109 | JEET | MANAGER | 155000 | 4500 |     30 |
+|  109 | JEET | MANAGER | 155000 | 4500 |     30 |
++------+------+---------+--------+------+--------+
+select * from ed_record where deptno in (select deptno from ed_record where name = "jeet");
++------+--------+------------+--------+------+--------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
++------+--------+------------+--------+------+--------+
+|  109 | JEET   | MANAGER    | 155000 | 4500 |     30 |
+|  109 | JEET   | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL  | OPERATIONS |  72000 | 1500 |     30 |
++------+--------+------------+--------+------+--------+
+select * from ed_record where deptno in (select deptno from dept where dname in ("computer", "mechanical"));
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
++------+----------+------------+--------+------+--------+
+select * from ed_record where deptno in (select deptno from ed_record where name = "jeet");
++------+--------+------------+--------+------+--------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
++------+--------+------------+--------+------+--------+
+|  109 | JEET   | MANAGER    | 155000 | 4500 |     30 |
+|  109 | JEET   | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL  | OPERATIONS |  72000 | 1500 |     30 |
++------+--------+------------+--------+------+--------+
+select deptno from dept where dname = "entc";
++--------+
+| deptno |
++--------+
+|     40 |
++--------+
+select deptno from dept where deptno in (select deptno from dept where dname = "entc");
++--------+
+| deptno |
++--------+
+|     40 |
++--------+
+select max(salary) deptno from ed_record where deptno in (select deptno from dept where deptno in (select deptno from dept where dname = "entc"));
++--------+
+| deptno |
++--------+
+|  97000 |
++--------+
+select max(salary) from ed_record where deptno in (select deptno from dept where dname = "entc");
++-------------+
+| max(salary) |
++-------------+
+|       97000 |
++-------------+
+select min(salary) from ed_record where deptno in (select deptno from dept where dname = "entc");
++-------------+
+| min(salary) |
++-------------+
+|       50000 |
++-------------+
+select min(salary) from ed_record where deptno in (select deptno from dept where dname = "entc");
++-------------+
+| min(salary) |
++-------------+
+|       50000 |
++-------------+
+select * from  ed_record where salary in (select min(salary) from ed_record where deptno in (select deptno from dept where dname = "entc"));
++------+--------+---------+--------+------+--------+
+| ID   | NAME   | JOB     | SALARY | COMM | DEPTNO |
++------+--------+---------+--------+------+--------+
+|  114 | SHIRIN | SALES   |  50000 | 1500 |     40 |
+|  115 | SOHAIL | QUALITY |  50000 | 2540 |     40 |
++------+--------+---------+--------+------+--------+
 ```
