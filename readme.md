@@ -1389,3 +1389,655 @@ select * from  ed_record where salary in (select min(salary) from ed_record wher
 |  115 | SOHAIL | QUALITY |  50000 | 2540 |     40 |
 +------+--------+---------+--------+------+--------+
 ```
+
+```sql
+-- 30|11|24
+-- ED_RECORD QUESTIONS-ANSWERS:
+show databases;
+use mysql;
+create table ED_RECORD(ID int, NAME varchar(20), JOB varchar(20), SALARY int, COMM int, DEPTNO int);
+insert into ED_RECORD values(101,"SURESH","MANAGER",100000,5000,20);
+select * from ED_RECORD;
+insert into ED_RECORD values(102,"ROHIT","SALES",100000,5000,20);
+insert into ED_RECORD values(103,"SUNITA","QUALITY",70000,3000,20);
+insert into ED_RECORD values(104,"GAURI","OPERATIONS",80000,3500,20);
+insert into ED_RECORD values(105,"SHRUTIKA","MANAGER",150000,4500,10);
+insert into ED_RECORD values(106,"SAHIL","SALES",130000,3500,10);
+insert into ED_RECORD values(107,"SHALAKA","QUALITY",64000,3500,10);
+insert into ED_RECORD values(108,"MOHSIN","OPERATIONS",55000,2500,10);
+insert into ED_RECORD values(109,"JEET","MANAGER",155000,4500,30);
+insert into ED_RECORD values(109,"JEET","MANAGER",155000,4500,30);
+insert into ED_RECORD values(110,"YOGESH","SALES",90000,3500,30);
+insert into ED_RECORD values(111,"SMRUTI","QUALITY",55000,2500,30);
+insert into ED_RECORD values(112,"PAYAL","OPERATIONS",72000,1500,30);
+insert into ED_RECORD values(113,"SWAPNIL","MANAGER",97000,3200,40);
+insert into ED_RECORD values(114,"SHIRIN","SALES",50000,1500,40);
+insert into ED_RECORD values(115,"SOHAIL","QUALITY",50000,2540,40);
+insert into ED_RECORD values(116,"SURAJ","OPERATIONS",83000,2700,40);
+insert into ED_RECORD values(117,"GILL","SALES",34000,NULL,50);
+insert into ED_RECORD values(118,"SAURABH","OPERATIONS",41200,0,50);
+insert into ED_RECORD values(119,"ASHISH","MANAGER",53470,3700,60);
+
+select * from ed_record;
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
++------+----------+------------+--------+------+--------+
+20 rows in set (0.02 sec)
+
+-- Q1: DISPLAY ALL THE RECORDS OF THE TABLE?
+select * from ed_record;
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
++------+----------+------------+--------+------+--------+
+20 rows in set (0.02 sec)
+
+-- Q2.DISPLAY NAMES OF EMPLOYEES WORKING IN THE COMPANY?
+select name from ed_record;
++----------+
+| name     |
++----------+
+| SURESH   |
+| ROHIT    |
+| SUNITA   |
+| GAURI    |
+| SHRUTIKA |
+| SAHIL    |
+| SHALAKA  |
+| MOHSIN   |
+| JEET     |
+| JEET     |
+| YOGESH   |
+| SMRUTI   |
+| PAYAL    |
+| SWAPNIL  |
+| SHIRIN   |
+| SOHAIL   |
+| SURAJ    |
+| GILL     |
+| SAURABH  |
+| ASHISH   |
++----------+
+20 rows in set (0.02 sec)
+
+select name from ed_record where salary > 0;
++----------+
+| name     |
++----------+
+| SURESH   |
+| ROHIT    |
+| SUNITA   |
+| GAURI    |
+| SHRUTIKA |
+| SAHIL    |
+| SHALAKA  |
+| MOHSIN   |
+| JEET     |
+| JEET     |
+| YOGESH   |
+| SMRUTI   |
+| PAYAL    |
+| SWAPNIL  |
+| SHIRIN   |
+| SOHAIL   |
+| SURAJ    |
+| GILL     |
+| SAURABH  |
+| ASHISH   |
++----------+
+
+-- Q3.DISPLAY NAME OF EMPLOYEES HAVING SALARY 34000?
+select name from ed_record where salary = 34000;
++------+
+| name |
++------+
+| GILL |
++------+
+1 row in set (0.00 sec)
+
+-- Q4.DISPLAY NAME OF EMPLOYEES WHO ARE WORKING AS MANAGER?
+select name from ed_record where job = "manager";
++----------+
+| name     |
++----------+
+| SURESH   |
+| SHRUTIKA |
+| JEET     |
+| JEET     |
+| SWAPNIL  |
+| ASHISH   |
++----------+
+6 rows in set (0.00 sec)
+
+-- Q5.DISPLAY ALL THE JOBS IN THE TABLE?
+select DISTINCT job from ed_record;
++------------+
+| job        |
++------------+
+| MANAGER    |
+| SALES      |
+| QUALITY    |
+| OPERATIONS |
++------------+
+
+select job from ed_record;
++------------+
+| job        |
++------------+
+| MANAGER    |
+| SALES      |
+| QUALITY    |
+| OPERATIONS |
+| MANAGER    |
+| SALES      |
+| QUALITY    |
+| OPERATIONS |
+| MANAGER    |
+| MANAGER    |
+| SALES      |
+| QUALITY    |
+| OPERATIONS |
+| MANAGER    |
+| SALES      |
+| QUALITY    |
+| OPERATIONS |
+| SALES      |
+| OPERATIONS |
+| MANAGER    |
++------------+
+
+-- Q6.DISPLAY ALL THE SALARIES IN THE TABLE?
+select DISTINCT salary from ed_record;
++--------+
+| salary |
++--------+
+| 100000 |
+|  70000 |
+|  80000 |
+| 150000 |
+| 130000 |
+|  64000 |
+|  55000 |
+| 155000 |
+|  90000 |
+|  72000 |
+|  97000 |
+|  50000 |
+|  83000 |
+|  34000 |
+|  41200 |
+|  53470 |
++--------+
+16 rows in set (0.01 sec)
+
+select salary from ed_record;
++--------+
+| salary |
++--------+
+| 100000 |
+| 100000 |
+|  70000 |
+|  80000 |
+| 150000 |
+| 130000 |
+|  64000 |
+|  55000 |
+| 155000 |
+| 155000 |
+|  90000 |
+|  55000 |
+|  72000 |
+|  97000 |
+|  50000 |
+|  50000 |
+|  83000 |
+|  34000 |
+|  41200 |
+|  53470 |
++--------+
+20 rows in set (0.00 sec)
+
+-- Q7.DISPLAY ALL THE EMPLOYEES DETAILS WORKING IN DEPTNO 20?
+select * from ed_record where deptno = 20;
++------+--------+------------+--------+------+--------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
++------+--------+------------+--------+------+--------+
+|  101 | SURESH | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT  | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI  | OPERATIONS |  80000 | 3500 |     20 |
++------+--------+------------+--------+------+--------+
+4 rows in set (0.00 sec)
+
+-- Q8.DISPLAY DETAILS OF EMPLOYEE WITH ID=116?
+select * from ed_record where id = 116;
++------+-------+------------+--------+------+--------+
+| ID   | NAME  | JOB        | SALARY | COMM | DEPTNO |
++------+-------+------------+--------+------+--------+
+|  116 | SURAJ | OPERATIONS |  83000 | 2700 |     40 |
++------+-------+------------+--------+------+--------+
+1 row in set (0.00 sec)
+
+-- Q9.DISPLAY NAME, SALARY AND JOB OF EMPLOYEE HAVING ID=109?
+select name, salary, job from ed_record where id = 109;
++------+--------+---------+
+| name | salary | job     |
++------+--------+---------+
+| JEET | 155000 | MANAGER |
+| JEET | 155000 | MANAGER |
++------+--------+---------+
+2 rows in set (0.00 sec)
+
+-- Q10.DISPLAY NAMES,JOB AND SALARY OF EMPLOYEES WHO ARE WORKING AS SALES?
+select name, salary , job from ed_record where job = "sales";
++--------+--------+-------+
+| name   | salary | job   |
++--------+--------+-------+
+| ROHIT  | 100000 | SALES |
+| SAHIL  | 130000 | SALES |
+| YOGESH |  90000 | SALES |
+| SHIRIN |  50000 | SALES |
+| GILL   |  34000 | SALES |
++--------+--------+-------+
+5 rows in set (0.00 sec)
+
+-- Q11.DISPLAY ALL DETAILS OF EMPLOYEE WHO EARNS COMMISION 1500?
+select * from ed_record where comm = 1500;
++------+--------+------------+--------+------+--------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
++------+--------+------------+--------+------+--------+
+|  112 | PAYAL  | OPERATIONS |  72000 | 1500 |     30 |
+|  114 | SHIRIN | SALES      |  50000 | 1500 |     40 |
++------+--------+------------+--------+------+--------+
+2 rows in set (0.00 sec)
+
+-- Q12.DISPLAY THE SALARY AND JOB OF SMRUTI?
+select salary, job from ed_record where name = "smruti";
++--------+---------+
+| salary | job     |
++--------+---------+
+|  55000 | QUALITY |
++--------+---------+
+1 row in set (0.00 sec)
+
+-- Q13.DISPLAY THE MAXIMUM SALARY FROM THE TABLE?
+select max(salary) from ed_record;
++-------------+
+| max(salary) |
++-------------+
+|      155000 |
++-------------+
+1 row in set (0.02 sec)
+
+-- Q14.DISPLAY THE MINIMUM SALARY FROM THE TABLE?
+select min(salary) from ed_record;
++-------------+
+| min(salary) |
++-------------+
+|       34000 |
++-------------+
+1 row in set (0.01 sec)
+
+-- Q15.DISPLAY THE NAME OF THE EMPLOYEE WHO EARNS MAXIMUM SALARY?
+select name from ed_record where salary = (select max(salary) from ed_record);
++------+
+| name |
++------+
+| JEET |
+| JEET |
++------+
+2 rows in set (0.02 sec)
+
+select name from ed_record order by salary desc limit 1;
++------+
+| name |
++------+
+| JEET |
++------+
+1 row in set (0.00 sec)
+
+select * from ed_record order by salary desc limit 1;
++------+------+---------+--------+------+--------+
+| ID   | NAME | JOB     | SALARY | COMM | DEPTNO |
++------+------+---------+--------+------+--------+
+|  109 | JEET | MANAGER | 155000 | 4500 |     30 |
++------+------+---------+--------+------+--------+
+1 row in set (0.00 sec)
+
+-- Q16.DISPLAY THE NAME OF THE EMPLOYEE WHO EARNS MINIMUM SALARY?
+select name from ed_record where salary = (select min(salary) from ed_record);
++------+
+| name |
++------+
+| GILL |
++------+
+1 row in set (0.00 sec)
+
+select name from ed_record order by salary limit 1;
++------+
+| name |
++------+
+| GILL |
++------+
+1 row in set (0.00 sec)
+
+select * from ed_record order by salary limit 1;
++------+------+-------+--------+------+--------+
+| ID   | NAME | JOB   | SALARY | COMM | DEPTNO |
++------+------+-------+--------+------+--------+
+|  117 | GILL | SALES |  34000 | NULL |     50 |
++------+------+-------+--------+------+--------+
+1 row in set (0.01 sec)
+
+-- Q17.DISPLAY THE AVERAGE SALARY OF ALL THE EMPLOYEES?
+select avg(salary) from ed_record;
++-------------+
+| avg(salary) |
++-------------+
+|  84233.5000 |
++-------------+
+1 row in set (0.01 sec)
+select id, avg(salary) from ed_record where salary group by id;
++------+-------------+
+| id   | avg(salary) |
++------+-------------+
+|  101 | 100000.0000 |
+|  102 | 100000.0000 |
+|  103 |  70000.0000 |
+|  104 |  80000.0000 |
+|  105 | 150000.0000 |
+|  106 | 130000.0000 |
+|  107 |  64000.0000 |
+|  108 |  55000.0000 |
+|  109 | 155000.0000 |
+|  110 |  90000.0000 |
+|  111 |  55000.0000 |
+|  112 |  72000.0000 |
+|  113 |  97000.0000 |
+|  114 |  50000.0000 |
+|  115 |  50000.0000 |
+|  116 |  83000.0000 |
+|  117 |  34000.0000 |
+|  118 |  41200.0000 |
+|  119 |  53470.0000 |
++------+-------------+
+19 rows in set (0.00 sec)
+
+-- Q18.DISPPLAY THE TOTAL COSTING RQUIRED FOR THE COMPANY WITH REFERENCE TO SALARY?
+select sum(salary) as TOTAL_COSTING_RQUIRED_FOR_THE_COMPANY from ed_record;
++---------------------------------------+
+| TOTAL_COSTING_RQUIRED_FOR_THE_COMPANY |
++---------------------------------------+
+|                               1684670 |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+-- Q19.DISPLAY THE TOTAL NUMBER OF EMPLOYEES WORKING IN THE COMPANY?
+select count(id) as TOTAL_EMP from ed_record;
++-----------+
+| TOTAL_EMP |
++-----------+
+|        20 |
++-----------+
+1 row in set (0.00 sec)
+
+-- Q20.CREATE A TABLE WITH ONE PRIMARY KEY, 2 UNIQUE KEYS, 1 UNIQUE KEY WITH NOTNULL AND 1 NOT NULL.
+create table chini(id int primary key, fname varchar(20) unique, lname varchar(20) unique, mobile bigint unique not null, email varchar(25) not null); 
+show tables;
++------------------------------------------------------+
+| Tables_in_mysql                                      |
++------------------------------------------------------+
+| chini                                                |
++------------------------------------------------------+
+desc chini;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| fname  | varchar(20) | YES  | UNI | NULL    |       |
+| lname  | varchar(20) | YES  | UNI | NULL    |       |
+| mobile | bigint      | NO   | UNI | NULL    |       |
+| email  | varchar(25) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+```
+
+```sql
+-- 30|11|24
+-- Group Function: Aggregate Function: MultiRow Function.
+-- Clause:-Rules
+-- 1.Where-->Condition
+-- 2.Group By-->Grouping and Returns result as per group.
+
+select * from ed_record;
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
++------+----------+------------+--------+------+--------+
+20 rows in set (0.00 sec)
+
+-- Q:Display Number of employee working in deptno=20?
+SELECT COUNT(DEPTNO), deptno FROM ED_RECORD WHERE DEPTNO=20;
++---------------+--------+
+| COUNT(DEPTNO) | deptno |
++---------------+--------+
+|             4 |     20 |
++---------------+--------+
+1 row in set (0.00 sec)
+
+-- Q:Display Number of employee working in deptno=10?
+SELECT COUNT(DEPTNO), deptno FROM ED_RECORD WHERE DEPTNO=10;
++---------------+--------+
+| COUNT(DEPTNO) | deptno |
++---------------+--------+
+|             4 |     10 |
++---------------+--------+
+1 row in set (0.00 sec)
+
+-- Q:Display number of Employees working in each deptno?
+SELECT COUNT(DEPTNO), deptno FROM ED_RECORD group by DEPTNO;
++---------------+--------+
+| COUNT(DEPTNO) | deptno |
++---------------+--------+
+|             4 |     20 |
+|             4 |     10 |
+|             5 |     30 |
+|             4 |     40 |
+|             2 |     50 |
+|             1 |     60 |
++---------------+--------+
+6 rows in set (0.00 sec)
+
+-- Q:Display jobs available in each deptno?
+SELECT COUNT(JOB),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++------------+--------+
+| COUNT(JOB) | DEPTNO |
++------------+--------+
+|          4 |     20 |
+|          4 |     10 |
+|          5 |     30 |
+|          4 |     40 |
+|          2 |     50 |
+|          1 |     60 |
++------------+--------+
+6 rows in set (0.00 sec)
+
+-- Q:Display Total Salary of each department?
+SELECT SUM(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| SUM(SALARY) | DEPTNO |
++-------------+--------+
+|      350000 |     20 |
+|      399000 |     10 |
+|      527000 |     30 |
+|      280000 |     40 |
+|       75200 |     50 |
+|       53470 |     60 |
++-------------+--------+
+6 rows in set (0.00 sec)
+
+-- Q: Display the maximum salary given in each department number?
+SELECT MAX(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| MAX(SALARY) | DEPTNO |
++-------------+--------+
+|      100000 |     20 |
+|      150000 |     10 |
+|      155000 |     30 |
+|       97000 |     40 |
+|       41200 |     50 |
+|       53470 |     60 |
++-------------+--------+
+
+-- Q:Display the name of the employee who is earning the maximum salary in each deptno?
+
+
+-- Q:Display the average salary in each deptno?
+SELECT AVG(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| AVG(SALARY) | DEPTNO |
++-------------+--------+
+|  87500.0000 |     20 |
+|  99750.0000 |     10 |
+| 105400.0000 |     30 |
+|  70000.0000 |     40 |
+|  37600.0000 |     50 |
+|  53470.0000 |     60 |
++-------------+--------+
+6 rows in set (0.00 sec)
+
+-- Q:Display Number of employee working as Manager?
+SELECT COUNT(ID),JOB FROM ED_RECORD WHERE JOB='MANAGER';
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         6 | MANAGER |
++-----------+---------+
+1 row in set (0.00 sec)
+
+-- Q:Display Number of employee working as QUALITY?
+SELECT COUNT(ID),JOB FROM ED_RECORD WHERE JOB='QUALITY';
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         4 | QUALITY |
++-----------+---------+
+1 row in set (0.00 sec)
+
+-- Q:Display number of employee working in each job designation?
+SELECT COUNT(ID),JOB FROM ED_RECORD GROUP BY JOB;
++-----------+------------+
+| COUNT(ID) | JOB        |
++-----------+------------+
+|         6 | MANAGER    |
+|         5 | SALES      |
+|         4 | QUALITY    |
+|         5 | OPERATIONS |
++-----------+------------+
+4 rows in set (0.00 sec)
+
+-- Q:Display number of employee in each deptno earning salary >=100000?
+SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE SALARY >=100000 GROUP BY DEPTNO;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         2 |     20 |
+|         2 |     10 |
+|         2 |     30 |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+-- Q:Display number of employee in each deptno earning salary <100000?
+SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE SALARY<100000 GROUP BY DEPTNO;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         2 |     20 |
+|         2 |     10 |
+|         3 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
++-----------+--------+
+6 rows in set (0.00 sec)
+
+-- Q:Display the count of employees earning >=100000 in each job designation?
+SELECT COUNT(ID),JOB FROM ED_RECORD WHERE SALARY>100000 GROUP BY JOB;
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         3 | MANAGER |
+|         1 | SALES   |
++-----------+---------+
+2 rows in set (0.00 sec)
+
+SELECT COUNT(ID),JOB FROM ED_RECORD WHERE SALARY>=100000 GROUP BY JOB;
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         4 | MANAGER |
+|         2 | SALES   |
++-----------+---------+
+2 rows in set (0.00 sec) 
+```

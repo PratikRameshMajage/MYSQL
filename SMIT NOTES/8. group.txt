@@ -1,0 +1,268 @@
+Clause:-Rules
+1.Where-->Condition
+2.Group By-->Grouping and Returns result as per group.
+
+mysql> SELECT * FROM ED_RECORD;
++------+----------+------------+--------+------+--------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
++------+----------+------------+--------+------+--------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |
+|  118 | SOURABH  | OPERATIONS |  41200 |    0 |     50 |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
+|  120 | SURESH   | QUALITY    |  41200 |    0 |     70 |
+|  103 | NAVED    | SECURITY   |    500 |    0 |    100 |
+|  121 | SHIKHAR  | FINANCE    |    700 |   40 |    200 |
+|  123 | PRIYA    | HR         |   4500 |  400 |    300 |
+|  124 | NULL     | NULL       |   NULL | NULL |   NULL |
++------+----------+------------+--------+------+--------+
+24 rows in set (0.02 sec)
+
+Q:Display Number of employee working in deptno=20?
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE DEPTNO=20;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
++-----------+--------+
+1 row in set (0.01 sec)
+
+Q:Display Number of employee working in deptno=10?
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE DEPTNO=10;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     10 |
++-----------+--------+
+1 row in set (0.00 sec)
+
+Q:Display Number of employee working in deptno=10?
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE DEPTNO=200;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         1 |    200 |
++-----------+--------+
+1 row in set (0.00 sec)
+
+*Q:Display number of Employees working in each deptno?
+
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
+|         4 |     10 |
+|         4 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
+|         1 |    100 |
+|         1 |    200 |
+|         1 |    300 |
+|         1 |   NULL |
++-----------+--------+
+11 rows in set (0.00 sec)
+
+Q:Display jobs available in each deptno?
+
+
+mysql> SELECT COUNT(JOB),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++------------+--------+
+| COUNT(JOB) | DEPTNO |
++------------+--------+
+|          4 |     20 |
+|          4 |     10 |
+|          4 |     30 |
+|          4 |     40 |
+|          2 |     50 |
+|          1 |     60 |
+|          1 |     70 |
+|          1 |    100 |
+|          1 |    200 |
+|          1 |    300 |
+|          0 |   NULL |
++------------+--------+
+11 rows in set (0.00 sec)
+
+
+Q:Display Total Salary of each department?
+
+
+mysql> SELECT SUM(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| SUM(SALARY) | DEPTNO |
++-------------+--------+
+|      350000 |     20 |
+|      399000 |     10 |
+|      372000 |     30 |
+|      280000 |     40 |
+|       75200 |     50 |
+|       53470 |     60 |
+|       41200 |     70 |
+|         500 |    100 |
+|         700 |    200 |
+|        4500 |    300 |
+|        NULL |   NULL |
++-------------+--------+
+11 rows in set (0.00 sec)
+
+
+Q: Display the maximum salary given in each department number?
+
+
+mysql> SELECT MAX(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| MAX(SALARY) | DEPTNO |
++-------------+--------+
+|      100000 |     20 |
+|      150000 |     10 |
+|      155000 |     30 |
+|       97000 |     40 |
+|       41200 |     50 |
+|       53470 |     60 |
+|       41200 |     70 |
+|         500 |    100 |
+|         700 |    200 |
+|        4500 |    300 |
+|        NULL |   NULL |
++-------------+--------+
+11 rows in set (0.00 sec)
+
+Q:Display the name of the employee who is earning the maximum salary in each 
+ deptno?
+
+Q:Display the average salary in each deptno?
+
+
+mysql> SELECT AVG(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| AVG(SALARY) | DEPTNO |
++-------------+--------+
+|  87500.0000 |     20 |
+|  99750.0000 |     10 |
+|  93000.0000 |     30 |
+|  70000.0000 |     40 |
+|  37600.0000 |     50 |
+|  53470.0000 |     60 |
+|  41200.0000 |     70 |
+|    500.0000 |    100 |
+|    700.0000 |    200 |
+|   4500.0000 |    300 |
+|        NULL |   NULL |
++-------------+--------+
+11 rows in set (0.00 sec)
+
+
+Q:Display Number of employee working as Manager?
+
+
+mysql> SELECT COUNT(ID),JOB FROM ED_RECORD WHERE JOB='MANAGER';
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         5 | MANAGER |
++-----------+---------+
+1 row in set (0.00 sec)
+
+
+Q:Display Number of employee working as QUALITY?
+
+
+mysql> SELECT COUNT(ID),JOB FROM ED_RECORD WHERE JOB='QUALITY';
++-----------+---------+
+| COUNT(ID) | JOB|
++-----------+---------+
+|         5 | QUALITY  |
++-----------+---------+
+1 row in set (0.00 sec)
+
+
+Q:Display number of employee working in each job designation?
+
+
+mysql> SELECT COUNT(ID),JOB FROM ED_RECORD GROUP BY JOB;
++-----------+------------+
+| COUNT(ID) | JOB        |
++-----------+------------+
+|         5 | MANAGER    |
+|         5 | SALES      |
+|         5 | QUALITY    |
+|         5 | OPERATIONS |
+|         1 | SECURITY   |
+|         1 | FINANCE    |
+|         1 | HR         |
+|         1 | NULL       |
++-----------+------------+
+8 rows in set (0.00 sec)
+
+Q:Display number of employee in each deptno earning salary >=100000?
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE SALARY >=100000 GROUP BY DEPTNO;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         2 |     20 |
+|         2 |     10 |
+ |         1 |     30 |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+Q:Display number of employee in each deptno earning salary <100000?
+
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD WHERE SALARY<100000 GROUP BY DEPTNO;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         2 |     20 |
+|         2 |     10 |
+|         3 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
+|         1 |    100 |
+|         1 |    200 |
+|         1 |    300 |
++-----------+--------+
+10 rows in set (0.00 sec)
+
+
+Q:Display the count of employees earning >=100000 in each job designation?
+
+
+mysql> SELECT COUNT(ID),JOB FROM ED_RECORD WHERE SALARY>100000 GROUP BY JOB;
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         2 | MANAGER |
+|         1 | SALES   |
++-----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(ID),JOB FROM ED_RECORD WHERE SALARY>=100000 GROUP BY JOB;
++-----------+---------+
+| COUNT(ID) | JOB     |
++-----------+---------+
+|         3 | MANAGER |
+|         2 | SALES   |
++-----------+---------+
+2 rows in set (0.00 sec)

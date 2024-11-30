@@ -1,0 +1,416 @@
+ Q1:DISPLAY NUMBER OF EMPLOYEES AND AVERAGE SALARY OF EACH DEPARTMENT FROM TABLE WHOSE TOTAL SALARY IS ABOVE 300000?
+
+
+mysql> SELECT COUNT(ID),AVG(SALARY),DEPTNO FROM  ED_RECORD GROUP BY DEPTNO  HAVING SUM(SALARY)>300000;
++-----------+-------------+--------+
+| COUNT(ID) | AVG(SALARY) | DEPTNO |
++-----------+-------------+--------+
+|         4 |  87500.0000 |     20 |
+|         4 |  99750.0000 |     10 |
+|         4 |  93000.0000 |     30 |
++-----------+-------------+--------+
+3 rows in set (0.00 sec)
+
+
+Q2:DISPLAY SALARY WHICH ARE REPEATED IN SALARY COLUMN?
+
+mysql> SELECT SALARY FROM ED_RECORD GROUP BY SALARY HAVING COUNT(SALARY)>1;
++--------+
+| SALARY |
++--------+
+| 100000 |
+|  55000 |
+|  50000 |
+|  41200 |
++--------+
+
+-----CROSS CHECK--
+ymysql> SELECT SALARY FROM ED_RECORD WHERE SALARY=100000;
++--------+
+| SALARY |
++--------+
+| 100000 |
+| 100000 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT SALARY FROM ED_RECORD WHERE SALARY=55000;
++--------+
+| SALARY |
++--------+
+|  55000 |
+|  55000 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT SALARY FROM ED_RECORD WHERE SALARY=50000;
++--------+
+| SALARY |
++--------+
+|  50000 |
+|  50000 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT SALARY FROM ED_RECORD WHERE SALARY=41200;
++--------+
+| SALARY |
++--------+
+|  41200 |
+|  41200 |
++--------+
+2 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------
+Q3:DISPLAY EMPLOYEE NAME WHOSE NAME IS REPEATED?
+
+
+mysql> SELECT NAME FROM ED_RECORD GROUP BY NAME HAVING COUNT(NAME)>1;
++--------+
+| NAME   |
++--------+
+| SURESH |
++--------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT NAME FROM ED_RECORD GROUP BY NAME HAVING COUNT(NAME)>2;
+Empty set (0.00 sec)
+
+
+------------------------------------------------------------------------------------
+
+
+Q4:DISPLAY AVERAGE SALARY AND DEPTNO OF EACH DEPARTMENT  WHOSE AVERAGE SALARY IS BETWEEN 90000 TO 95000?
+
+mysql> SELECT AVG(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING AVG(SALARY) BETWEEN 90000 AND 95000;
++-------------+--------+
+| AVG(SALARY) | DEPTNO |
++-------------+--------+
+|  93000.0000 |     30 |
++-------------+--------+
+1 row in set (0.00 sec)
+
+nbn
+--CROSS CHECKING--
+mysql> SELECT AVG(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| AVG(SALARY) | DEPTNO |
++-------------+--------+
+|  87500.0000 |     20 |
+|  99750.0000 |     10 |
+|  93000.0000 |     30 |
+|  70000.0000 |     40 |
+|  37600.0000 |     50 |
+|  53470.0000 |     60 |
+|  41200.0000 |     70 |
++-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT AVG(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING AVG(SALARY) BETWEEN 90000 AND 100000;
++-------------+--------+
+| AVG(SALARY) | DEPTNO |
++-------------+--------+
+|  99750.0000 |     10 |
+|  93000.0000 |     30 |
++-------------+--------+
+2 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------
+
+Q5:DISPLAY HOW MANY SALES ARE WORKING IN EACH DEPARTMENT?
+
+mysql>SELECT COUNT(JOB),DEPTNO FROM ED_RECORD WHERE JOB="SALES" GROUP BY DEPTNO;
++------------+--------+
+| COUNT(JOB) | DEPTNO |
++------------+--------+
+|          1 |     20 |
+|          1 |     10 |
+|          1 |     30 |
+|          1 |     40 |
+|          1 |     50 |
++------------+--------+
+5 rows in set (0.00 sec)
+
+Q6:DISPLAY THE MAXIMUM SALARY GIVEN IN EACH DEPARTMENT?
+
+mysql> SELECT MAX(SALARY),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-------------+--------+
+| MAX(SALARY) | DEPTNO |
++-------------+--------+
+|      100000 |     20 |
+|      150000 |     10 |
+|      155000 |     30 |
+|       97000 |     40 |
+|       41200 |     50 |
+|       53470 |     60 |
+|       41200 |     70 |
++-------------+--------+
+7 rows in set (0.00 sec)
+
+---CROSS CHECK---
+
+
+mysql> SELECT MAX(SALARY) FROM ED_RECORD WHERE DEPTNO=20;
++-------------+
+| MAX(SALARY) |
++-------------+
+|      100000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY) FROM ED_RECORD WHERE DEPTNO=50;
++-------------+
+| MAX(SALARY) |
++-------------+
+|       41200 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY) FROM ED_RECORD WHERE DEPTNO=10;
++-------------+
+| MAX(SALARY) |
++-------------+
+|      150000 |
++-------------+
+1 row in set (0.00 sec)
+
+--------------------------------------------------------------------
+Q7:DISPLAY THE MINIMUM SALARY GIVEN IN EACH DEPARTMENT?
+
+
+--------------------------------------------------------------
+
+Q8:DISPLAY NUMBER OF EMPLOYEES WHO WORK IN EACH DEPARTMENT?
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
+|         4 |     10 |
+|         4 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
++-----------+--------+
+7 rows in set (0.00 sec)
+------------------------------------------------------------------
+
+Q9: DISPLAY NUMBER OF EMPLOYEES WORKING IN EACH DEPARTMENT EXCLUDING DEPARTMENT NO 10?	
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING DEPTNO!=10;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
+|         4 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
++-----------+--------+
+6 rows in set (0.00 sec)
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING DEPTNO!=10;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
+|         4 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
++-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING DEPTNO>10;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
+|         4 |     30 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
++-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING DEPTNO>30;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
++-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(ID),DEPTNO FROM ED_RECORD GROUP BY DEPTNO HAVING DEPTNO!=30;
++-----------+--------+
+| COUNT(ID) | DEPTNO |
++-----------+--------+
+|         4 |     20 |
+|         4 |     10 |
+|         4 |     40 |
+|         2 |     50 |
+|         1 |     60 |
+|         1 |     70 |
++-----------+--------+
+6 rows in set (0.00 sec)
+
+
+Q10: DISPLAY HOW MANY TIMES A SALARY IS REPEATED?
+
+mysql> SELECT COUNT(SALARY),DEPTNO FROM ED_RECORD GROUP BY SALARY HAVING COUNT(SALARY)>1;
++---------------+--------+
+| COUNT(SALARY) | DEPTNO |
++---------------+--------+
+|             2 |     20 |
+|             2 |     10 |
+|             2 |     40 |
+|             2 |     50 |
++---------------+--------+
+4 rows in set (0.00 sec)
+--------------------------------------------------------
+
+Q:DISPLAY SUM,AVG, OF ALL MANAGER IN EACH DEPARTMENT?
+
+SELECT AVG(SALARY),SUM(SALARY),MAX(SALARY),MIN(SALARY),JOB,DEPTNO FROM ED_RECORD WHERE JOB="MANAGER" GROUP BY DEPTNO;;
+
+Q:NOT MANAGERS
+mysql>SELECT AVG(SALARY),SUM(SALARY),MAX(SALARY),MIN(SALARY),JOB,DEPTNO FROM ED_RECORD WHERE JOB!="MANAGER" GROUP BY JOB;
+
+************************************************
+
+ 155000 |
+
+
+
+mysql> select max(salary),min(salary),avg(salary),sum(salary) deptno from ed_record group by deptno;
++-------------+-------------+-------------+--------+
+| max(salary) | min(salary) | avg(salary) | deptno |
++-------------+-------------+-------------+--------+
+|      100000 |       70000 |  87500.0000 | 350000 |
+|      150000 |       55000 |  99750.0000 | 399000 |
+|      155000 |       55000 |  93000.0000 | 372000 |
+|       97000 |       50000 |  70000.0000 | 280000 |
+|       41200 |       34000 |  37600.0000 |  75200 |
+|       53470 |       53470 |  53470.0000 |  53470 |
+|       41200 |       41200 |  41200.0000 |  41200 |
+|         500 |         500 |    500.0000 |    500 |
+|         700 |         700 |    700.0000 |    700 |
+|        4500 |        4500 |   4500.0000 |   4500 |
+|        NULL |        NULL |        NULL |   NULL |
++-------------+-------------+-------------+--------+
+11 rows in set, 1 warning (0.00 sec)
+
+mysql> select max(salary),min(salary),avg(salary),sum(salary), deptno from ed_record group by deptno; 
++-------------+-------------+-------------+-------------+--------+
+| max(salary) | min(salary) | avg(salary) | sum(salary) | deptno |
++-------------+-------------+-------------+-------------+--------+
+|      100000 |       70000 |  87500.0000 |      350000 |     20 |
+|      150000 |       55000 |  99750.0000 |      399000 |     10 |
+|      155000 |       55000 |  93000.0000 |      372000 |     30 |
+|       97000 |       50000 |  70000.0000 |      280000 |     40 |
+|       41200 |       34000 |  37600.0000 |       75200 |     50 |
+|       53470 |       53470 |  53470.0000 |       53470 |     60 |
+|       41200 |       41200 |  41200.0000 |       41200 |     70 |
+|         500 |         500 |    500.0000 |         500 |    100 |
+|         700 |         700 |    700.0000 |         700 |    200 |
+|        4500 |        4500 |   4500.0000 |        4500 |    300 |
+|        NULL |        NULL |        NULL |        NULL |   NULL |
++-------------+-------------+-------------+-------------+--------+
+11 rows in set (0.00 sec)
+
+mysql> select max(salary),min(salary),avg(salary),sum(salary), deptno from ed_record group by deptno
+    -> having;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> select max(salary),min(salary),avg(salary),sum(salary), deptno from ed_record group by deptno having max(salary)>99000;
++-------------+-------------+-------------+-------------+--------+
+| max(salary) | min(salary) | avg(salary) | sum(salary) | deptno |
++-------------+-------------+-------------+-------------+--------+
+|      100000 |       70000 |  87500.0000 |      350000 |     20 |
+|      150000 |       55000 |  99750.0000 |      399000 |     10 |
+|      155000 |       55000 |  93000.0000 |      372000 |     30 |
++-------------+-------------+-------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select max(salary),min(salary),avg(salary),sum(salary), deptno from ed_record group by deptno having min(salary)<50000;
++-------------+-------------+-------------+-------------+--------+
+| max(salary) | min(salary) | avg(salary) | sum(salary) | deptno |
++-------------+-------------+-------------+-------------+--------+
+|       41200 |       34000 |  37600.0000 |       75200 |     50 |
+|       41200 |       41200 |  41200.0000 |       41200 |     70 |
+|         500 |         500 |    500.0000 |         500 |    100 |
+|         700 |         700 |    700.0000 |         700 |    200 |
+|        4500 |        4500 |   4500.0000 |        4500 |    300 |
++-------------+-------------+-------------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select max(salary),min(salary),avg(salary),sum(salary), deptno from ed_record group by deptno;
++-------------+-------------+-------------+-------------+--------+
+| max(salary) | min(salary) | avg(salary) | sum(salary) | deptno |
++-------------+-------------+-------------+-------------+--------+
+|      100000 |       70000 |  87500.0000 |      350000 |     20 |
+|      150000 |       55000 |  99750.0000 |      399000 |     10 |
+|      155000 |       55000 |  93000.0000 |      372000 |     30 |
+|       97000 |       50000 |  70000.0000 |      280000 |     40 |
+|       41200 |       34000 |  37600.0000 |       75200 |     50 |
+|       53470 |       53470 |  53470.0000 |       53470 |     60 |
+|       41200 |       41200 |  41200.0000 |       41200 |     70 |
+|         500 |         500 |    500.0000 |         500 |    100 |
+|         700 |         700 |    700.0000 |         700 |    200 |
+|        4500 |        4500 |   4500.0000 |        4500 |    300 |
+|        NULL |        NULL |        NULL |        NULL |   NULL |
++-------------+-------------+-------------+-------------+--------+
+11 rows in set (0.00 sec)
+
+mysql> select max(salary),min(salary),round(avg(salary)),sum(salary), deptno from ed_record group by deptno;
++-------------+-------------+--------------------+-------------+--------+
+| max(salary) | min(salary) | round(avg(salary)) | sum(salary) | deptno |
++-------------+-------------+--------------------+-------------+--------+
+|      100000 |       70000 |              87500 |      350000 |     20 |
+|      150000 |       55000 |              99750 |      399000 |     10 |
+|      155000 |       55000 |              93000 |      372000 |     30 |
+|       97000 |       50000 |              70000 |      280000 |     40 |
+|       41200 |       34000 |              37600 |       75200 |     50 |
+|       53470 |       53470 |              53470 |       53470 |     60 |
+|       41200 |       41200 |              41200 |       41200 |     70 |
+|         500 |         500 |                500 |         500 |    100 |
+|         700 |         700 |                700 |         700 |    200 |
+|        4500 |        4500 |               4500 |        4500 |    300 |
+|        NULL |        NULL |               NULL |        NULL |   NULL |
++-------------+-------------+--------------------+-------------+--------+
+11 rows in set (0.00 sec)
+
+mysql> select max(salary),min(salary),round(avg(salary)),sum(salary*12), deptno from ed_record group by deptno;
++-------------+-------------+--------------------+----------------+--------+
+| max(salary) | min(salary) | round(avg(salary)) | sum(salary*12) | deptno |
++-------------+-------------+--------------------+----------------+--------+
+|      100000 |       70000 |              87500 |        4200000 |     20 |
+|      150000 |       55000 |              99750 |        4788000 |     10 |
+|      155000 |       55000 |              93000 |        4464000 |     30 |
+|       97000 |       50000 |              70000 |        3360000 |     40 |
+|       41200 |       34000 |              37600 |         902400 |     50 |
+|       53470 |       53470 |              53470 |         641640 |     60 |
+|       41200 |       41200 |              41200 |         494400 |     70 |
+|         500 |         500 |                500 |           6000 |    100 |
+|         700 |         700 |                700 |           8400 |    200 |
+|        4500 |        4500 |               4500 |          54000 |    300 |
+|        NULL |        NULL |               NULL |           NULL |   NULL |
++-------------+-------------+--------------------+----------------+--------+
+11 rows in set (0.00 sec)
+
+mysql> select max(salary),min(salary),round(avg(salary)),sum(salary*12), deptno from ed_record group by deptno having sum(salary*12)>3400000;
++-------------+-------------+--------------------+----------------+--------+
+| max(salary) | min(salary) | round(avg(salary)) | sum(salary*12) | deptno |
++-------------+-------------+--------------------+----------------+--------+
+|      100000 |       70000 |              87500 |        4200000 |     20 |
+|      150000 |       55000 |              99750 |        4788000 |     10 |
+|      155000 |       55000 |              93000 |        4464000 |     30 |
++-------------+-------------+--------------------+----------------+--------+
+3 rows in set (0.00 sec)
