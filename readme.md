@@ -2041,3 +2041,1125 @@ SELECT COUNT(ID),JOB FROM ED_RECORD WHERE SALARY>=100000 GROUP BY JOB;
 +-----------+---------+
 2 rows in set (0.00 sec) 
 ```
+```sql
+-- 30|11|24
+use mysql;
+
+select * from ed_record inner join dept;
++------+----------+------------+--------+------+--------+--------+------------+------------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO | deptno | dname      | loc        |
++------+----------+------------+--------+------+--------+--------+------------+------------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     90 | art        | rajasthan  |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     80 | education  | karnataka  |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     70 | chemical   | panjabi    |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     60 | electric   | tamil_nadu |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     50 | it         | mp         |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     40 | entc       | chennai    |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     30 | civil      | banglore   |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     10 | mechanical | mumbai     |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     10 | mechanical | mumbai     |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     90 | art        | rajasthan  |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     80 | education  | karnataka  |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     70 | chemical   | panjabi    |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     60 | electric   | tamil_nadu |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     50 | it         | mp         |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     40 | entc       | chennai    |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     30 | civil      | banglore   |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     10 | mechanical | mumbai     |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     10 | mechanical | mumbai     |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     90 | art        | rajasthan  |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     80 | education  | karnataka  |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     70 | chemical   | panjabi    |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     60 | electric   | tamil_nadu |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     50 | it         | mp         |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     40 | entc       | chennai    |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     30 | civil      | banglore   |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     20 | computer   | pune       |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     20 | computer   | pune       |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     10 | mechanical | mumbai     |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     10 | mechanical | mumbai     |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     90 | art        | rajasthan  |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     80 | education  | karnataka  |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     70 | chemical   | panjabi    |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     60 | electric   | tamil_nadu |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     50 | it         | mp         |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     40 | entc       | chennai    |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     30 | civil      | banglore   |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     20 | computer   | pune       |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     20 | computer   | pune       |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     10 | mechanical | mumbai     |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     10 | mechanical | mumbai     |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     90 | art        | rajasthan  |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     80 | education  | karnataka  |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     70 | chemical   | panjabi    |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     60 | electric   | tamil_nadu |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     50 | it         | mp         |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     40 | entc       | chennai    |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     30 | civil      | banglore   |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     20 | computer   | pune       |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     20 | computer   | pune       |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     10 | mechanical | mumbai     |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     10 | mechanical | mumbai     |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     90 | art        | rajasthan  |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     80 | education  | karnataka  |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     70 | chemical   | panjabi    |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     60 | electric   | tamil_nadu |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     50 | it         | mp         |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     40 | entc       | chennai    |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     30 | civil      | banglore   |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     20 | computer   | pune       |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     20 | computer   | pune       |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     90 | art        | rajasthan  |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     80 | education  | karnataka  |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     70 | chemical   | panjabi    |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     60 | electric   | tamil_nadu |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     50 | it         | mp         |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     40 | entc       | chennai    |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     30 | civil      | banglore   |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     20 | computer   | pune       |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     20 | computer   | pune       |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     90 | art        | rajasthan  |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     80 | education  | karnataka  |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     70 | chemical   | panjabi    |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     60 | electric   | tamil_nadu |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     50 | it         | mp         |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     40 | entc       | chennai    |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     30 | civil      | banglore   |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     20 | computer   | pune       |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     20 | computer   | pune       |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     10 | mechanical | mumbai     |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     10 | mechanical | mumbai     |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     90 | art        | rajasthan  |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     80 | education  | karnataka  |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     70 | chemical   | panjabi    |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     60 | electric   | tamil_nadu |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     50 | it         | mp         |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     40 | entc       | chennai    |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     30 | civil      | banglore   |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     20 | computer   | pune       |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     20 | computer   | pune       |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     10 | mechanical | mumbai     |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     10 | mechanical | mumbai     |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     90 | art        | rajasthan  |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     80 | education  | karnataka  |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     70 | chemical   | panjabi    |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     60 | electric   | tamil_nadu |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     50 | it         | mp         |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     40 | entc       | chennai    |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     30 | civil      | banglore   |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     20 | computer   | pune       |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     20 | computer   | pune       |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     10 | mechanical | mumbai     |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     10 | mechanical | mumbai     |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     90 | art        | rajasthan  |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     80 | education  | karnataka  |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     70 | chemical   | panjabi    |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     60 | electric   | tamil_nadu |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     50 | it         | mp         |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     40 | entc       | chennai    |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     30 | civil      | banglore   |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     20 | computer   | pune       |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     20 | computer   | pune       |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     10 | mechanical | mumbai     |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     10 | mechanical | mumbai     |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     90 | art        | rajasthan  |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     80 | education  | karnataka  |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     70 | chemical   | panjabi    |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     60 | electric   | tamil_nadu |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     50 | it         | mp         |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     40 | entc       | chennai    |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     30 | civil      | banglore   |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     20 | computer   | pune       |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     20 | computer   | pune       |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     10 | mechanical | mumbai     |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     10 | mechanical | mumbai     |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     90 | art        | rajasthan  |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     80 | education  | karnataka  |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     70 | chemical   | panjabi    |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     60 | electric   | tamil_nadu |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     50 | it         | mp         |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     40 | entc       | chennai    |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     30 | civil      | banglore   |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     20 | computer   | pune       |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     20 | computer   | pune       |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     10 | mechanical | mumbai     |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     10 | mechanical | mumbai     |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     90 | art        | rajasthan  |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     80 | education  | karnataka  |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     70 | chemical   | panjabi    |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     60 | electric   | tamil_nadu |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     50 | it         | mp         |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     40 | entc       | chennai    |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     30 | civil      | banglore   |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     20 | computer   | pune       |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     20 | computer   | pune       |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     10 | mechanical | mumbai     |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     10 | mechanical | mumbai     |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     90 | art        | rajasthan  |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     80 | education  | karnataka  |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     70 | chemical   | panjabi    |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     60 | electric   | tamil_nadu |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     50 | it         | mp         |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     40 | entc       | chennai    |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     30 | civil      | banglore   |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     20 | computer   | pune       |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     20 | computer   | pune       |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     10 | mechanical | mumbai     |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     10 | mechanical | mumbai     |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     90 | art        | rajasthan  |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     80 | education  | karnataka  |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     70 | chemical   | panjabi    |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     60 | electric   | tamil_nadu |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     50 | it         | mp         |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     40 | entc       | chennai    |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     30 | civil      | banglore   |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     20 | computer   | pune       |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     20 | computer   | pune       |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     10 | mechanical | mumbai     |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     10 | mechanical | mumbai     |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     90 | art        | rajasthan  |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     80 | education  | karnataka  |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     70 | chemical   | panjabi    |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     60 | electric   | tamil_nadu |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     50 | it         | mp         |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     40 | entc       | chennai    |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     30 | civil      | banglore   |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     20 | computer   | pune       |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     20 | computer   | pune       |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     10 | mechanical | mumbai     |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     10 | mechanical | mumbai     |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     90 | art        | rajasthan  |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     80 | education  | karnataka  |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     70 | chemical   | panjabi    |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     60 | electric   | tamil_nadu |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     50 | it         | mp         |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     40 | entc       | chennai    |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     30 | civil      | banglore   |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     20 | computer   | pune       |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     20 | computer   | pune       |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     10 | mechanical | mumbai     |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     10 | mechanical | mumbai     |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     90 | art        | rajasthan  |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     80 | education  | karnataka  |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     70 | chemical   | panjabi    |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     60 | electric   | tamil_nadu |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     50 | it         | mp         |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     40 | entc       | chennai    |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     30 | civil      | banglore   |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     20 | computer   | pune       |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     20 | computer   | pune       |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     10 | mechanical | mumbai     |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     10 | mechanical | mumbai     |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     90 | art        | rajasthan  |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     80 | education  | karnataka  |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     70 | chemical   | panjabi    |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     60 | electric   | tamil_nadu |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     50 | it         | mp         |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     40 | entc       | chennai    |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     30 | civil      | banglore   |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     20 | computer   | pune       |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     20 | computer   | pune       |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     10 | mechanical | mumbai     |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     10 | mechanical | mumbai     |
++------+----------+------------+--------+------+--------+--------+------------+------------+
+220 rows in set (0.00 sec)
+
+select * from ed_record e, dept d where e.deptno = d. deptno;
++------+----------+------------+--------+------+--------+--------+------------+------------+
+| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO | deptno | dname      | loc        |
++------+----------+------------+--------+------+--------+--------+------------+------------+
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |     20 | computer   | pune       |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     20 | computer   | pune       |
+|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |     20 | computer   | pune       |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     20 | computer   | pune       |
+|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |     20 | computer   | pune       |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     10 | mechanical | mumbai     |
+|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |     10 | mechanical | mumbai     |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |     10 | mechanical | mumbai     |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     10 | mechanical | mumbai     |
+|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |     10 | mechanical | mumbai     |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     30 | civil      | banglore   |
+|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |     30 | civil      | banglore   |
+|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |     30 | civil      | banglore   |
+|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |     30 | civil      | banglore   |
+|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |     30 | civil      | banglore   |
+|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |     40 | entc       | chennai    |
+|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |     40 | entc       | chennai    |
+|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |     40 | entc       | chennai    |
+|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |     40 | entc       | chennai    |
+|  117 | GILL     | SALES      |  34000 | NULL |     50 |     50 | it         | mp         |
+|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |     50 | it         | mp         |
+|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |     60 | electric   | tamil_nadu |
++------+----------+------------+--------+------+--------+--------+------------+------------+
+28 rows in set (0.01 sec)
+
+select name from ed_record;
++----------+
+| name     |
++----------+
+| SURESH   |
+| ROHIT    |
+| SUNITA   |
+| GAURI    |
+| SHRUTIKA |
+| SAHIL    |
+| SHALAKA  |
+| MOHSIN   |
+| JEET     |
+| JEET     |
+| YOGESH   |
+| SMRUTI   |
+| PAYAL    |
+| SWAPNIL  |
+| SHIRIN   |
+| SOHAIL   |
+| SURAJ    |
+| GILL     |
+| SAURABH  |
+| ASHISH   |
++----------+
+20 rows in set (0.00 sec)
+
+select name from ed_record e, dept d where e.deptno = d. deptno;
++----------+
+| name     |
++----------+
+| SURESH   |
+| SURESH   |
+| ROHIT    |
+| ROHIT    |
+| SUNITA   |
+| SUNITA   |
+| GAURI    |
+| GAURI    |
+| SHRUTIKA |
+| SHRUTIKA |
+| SAHIL    |
+| SAHIL    |
+| SHALAKA  |
+| SHALAKA  |
+| MOHSIN   |
+| MOHSIN   |
+| JEET     |
+| JEET     |
+| YOGESH   |
+| SMRUTI   |
+| PAYAL    |
+| SWAPNIL  |
+| SHIRIN   |
+| SOHAIL   |
+| SURAJ    |
+| GILL     |
+| SAURABH  |
+| ASHISH   |
++----------+
+28 rows in set (0.00 sec)
+
+select name, dname from ed_record e, dept d where e.deptno = d. deptno;
++----------+------------+
+| name     | dname      |
++----------+------------+
+| SURESH   | computer   |
+| SURESH   | computer   |
+| ROHIT    | computer   |
+| ROHIT    | computer   |
+| SUNITA   | computer   |
+| SUNITA   | computer   |
+| GAURI    | computer   |
+| GAURI    | computer   |
+| SHRUTIKA | mechanical |
+| SHRUTIKA | mechanical |
+| SAHIL    | mechanical |
+| SAHIL    | mechanical |
+| SHALAKA  | mechanical |
+| SHALAKA  | mechanical |
+| MOHSIN   | mechanical |
+| MOHSIN   | mechanical |
+| JEET     | civil      |
+| JEET     | civil      |
+| YOGESH   | civil      |
+| SMRUTI   | civil      |
+| PAYAL    | civil      |
+| SWAPNIL  | entc       |
+| SHIRIN   | entc       |
+| SOHAIL   | entc       |
+| SURAJ    | entc       |
+| GILL     | it         |
+| SAURABH  | it         |
+| ASHISH   | electric   |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select name, dname from ed_record e, dept d where e.deptno = d.deptno;
++----------+------------+
+| name     | dname      |
++----------+------------+
+| SURESH   | computer   |
+| SURESH   | computer   |
+| ROHIT    | computer   |
+| ROHIT    | computer   |
+| SUNITA   | computer   |
+| SUNITA   | computer   |
+| GAURI    | computer   |
+| GAURI    | computer   |
+| SHRUTIKA | mechanical |
+| SHRUTIKA | mechanical |
+| SAHIL    | mechanical |
+| SAHIL    | mechanical |
+| SHALAKA  | mechanical |
+| SHALAKA  | mechanical |
+| MOHSIN   | mechanical |
+| MOHSIN   | mechanical |
+| JEET     | civil      |
+| JEET     | civil      |
+| YOGESH   | civil      |
+| SMRUTI   | civil      |
+| PAYAL    | civil      |
+| SWAPNIL  | entc       |
+| SHIRIN   | entc       |
+| SOHAIL   | entc       |
+| SURAJ    | entc       |
+| GILL     | it         |
+| SAURABH  | it         |
+| ASHISH   | electric   |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select loc, dname from ed_record e, dept d where e.deptno = d.deptno;
++------------+------------+
+| loc        | dname      |
++------------+------------+
+| pune       | computer   |
+| pune       | computer   |
+| pune       | computer   |
+| pune       | computer   |
+| pune       | computer   |
+| pune       | computer   |
+| pune       | computer   |
+| pune       | computer   |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| mumbai     | mechanical |
+| banglore   | civil      |
+| banglore   | civil      |
+| banglore   | civil      |
+| banglore   | civil      |
+| banglore   | civil      |
+| chennai    | entc       |
+| chennai    | entc       |
+| chennai    | entc       |
+| chennai    | entc       |
+| mp         | it         |
+| mp         | it         |
+| tamil_nadu | electric   |
++------------+------------+
+28 rows in set (0.00 sec)
+
+select name, loc from ed_record e, dept d where e.deptno = d.deptno;
++----------+------------+
+| name     | loc        |
++----------+------------+
+| SURESH   | pune       |
+| SURESH   | pune       |
+| ROHIT    | pune       |
+| ROHIT    | pune       |
+| SUNITA   | pune       |
+| SUNITA   | pune       |
+| GAURI    | pune       |
+| GAURI    | pune       |
+| SHRUTIKA | mumbai     |
+| SHRUTIKA | mumbai     |
+| SAHIL    | mumbai     |
+| SAHIL    | mumbai     |
+| SHALAKA  | mumbai     |
+| SHALAKA  | mumbai     |
+| MOHSIN   | mumbai     |
+| MOHSIN   | mumbai     |
+| JEET     | banglore   |
+| JEET     | banglore   |
+| YOGESH   | banglore   |
+| SMRUTI   | banglore   |
+| PAYAL    | banglore   |
+| SWAPNIL  | chennai    |
+| SHIRIN   | chennai    |
+| SOHAIL   | chennai    |
+| SURAJ    | chennai    |
+| GILL     | mp         |
+| SAURABH  | mp         |
+| ASHISH   | tamil_nadu |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select name, dname from ed_record e, dept d where e.deptno = d.deptno;
++----------+------------+
+| name     | dname      |
++----------+------------+
+| SURESH   | computer   |
+| SURESH   | computer   |
+| ROHIT    | computer   |
+| ROHIT    | computer   |
+| SUNITA   | computer   |
+| SUNITA   | computer   |
+| GAURI    | computer   |
+| GAURI    | computer   |
+| SHRUTIKA | mechanical |
+| SHRUTIKA | mechanical |
+| SAHIL    | mechanical |
+| SAHIL    | mechanical |
+| SHALAKA  | mechanical |
+| SHALAKA  | mechanical |
+| MOHSIN   | mechanical |
+| MOHSIN   | mechanical |
+| JEET     | civil      |
+| JEET     | civil      |
+| YOGESH   | civil      |
+| SMRUTI   | civil      |
+| PAYAL    | civil      |
+| SWAPNIL  | entc       |
+| SHIRIN   | entc       |
+| SOHAIL   | entc       |
+| SURAJ    | entc       |
+| GILL     | it         |
+| SAURABH  | it         |
+| ASHISH   | electric   |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select name, loc from ed_record e, dept d where e.deptno = d.deptno;
++----------+------------+
+| name     | loc        |
++----------+------------+
+| SURESH   | pune       |
+| SURESH   | pune       |
+| ROHIT    | pune       |
+| ROHIT    | pune       |
+| SUNITA   | pune       |
+| SUNITA   | pune       |
+| GAURI    | pune       |
+| GAURI    | pune       |
+| SHRUTIKA | mumbai     |
+| SHRUTIKA | mumbai     |
+| SAHIL    | mumbai     |
+| SAHIL    | mumbai     |
+| SHALAKA  | mumbai     |
+| SHALAKA  | mumbai     |
+| MOHSIN   | mumbai     |
+| MOHSIN   | mumbai     |
+| JEET     | banglore   |
+| JEET     | banglore   |
+| YOGESH   | banglore   |
+| SMRUTI   | banglore   |
+| PAYAL    | banglore   |
+| SWAPNIL  | chennai    |
+| SHIRIN   | chennai    |
+| SOHAIL   | chennai    |
+| SURAJ    | chennai    |
+| GILL     | mp         |
+| SAURABH  | mp         |
+| ASHISH   | tamil_nadu |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select name, dname from ed_record e, dept d where e.deptno = d.deptno;
++----------+------------+
+| name     | dname      |
++----------+------------+
+| SURESH   | computer   |
+| SURESH   | computer   |
+| ROHIT    | computer   |
+| ROHIT    | computer   |
+| SUNITA   | computer   |
+| SUNITA   | computer   |
+| GAURI    | computer   |
+| GAURI    | computer   |
+| SHRUTIKA | mechanical |
+| SHRUTIKA | mechanical |
+| SAHIL    | mechanical |
+| SAHIL    | mechanical |
+| SHALAKA  | mechanical |
+| SHALAKA  | mechanical |
+| MOHSIN   | mechanical |
+| MOHSIN   | mechanical |
+| JEET     | civil      |
+| JEET     | civil      |
+| YOGESH   | civil      |
+| SMRUTI   | civil      |
+| PAYAL    | civil      |
+| SWAPNIL  | entc       |
+| SHIRIN   | entc       |
+| SOHAIL   | entc       |
+| SURAJ    | entc       |
+| GILL     | it         |
+| SAURABH  | it         |
+| ASHISH   | electric   |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select name, dname from ed_record e, dept d where e.deptno = d.deptno and dname = "entc" ;
++---------+-------+
+| name    | dname |
++---------+-------+
+| SWAPNIL | entc  |
+| SHIRIN  | entc  |
+| SOHAIL  | entc  |
+| SURAJ   | entc  |
++---------+-------+
+4 rows in set (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and loc = "pune";
++--------+--------+
+| name   | salary |
++--------+--------+
+| SURESH | 100000 |
+| SURESH | 100000 |
+| ROHIT  | 100000 |
+| ROHIT  | 100000 |
+| SUNITA |  70000 |
+| SUNITA |  70000 |
+| GAURI  |  80000 |
+| GAURI  |  80000 |
++--------+--------+
+8 rows in set (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and loc = "pune";
++--------+--------+
+| name   | salary |
++--------+--------+
+| SURESH | 100000 |
+| SURESH | 100000 |
+| ROHIT  | 100000 |
+| ROHIT  | 100000 |
+| SUNITA |  70000 |
+| SUNITA |  70000 |
+| GAURI  |  80000 |
+| GAURI  |  80000 |
++--------+--------+
+8 rows in set (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and loc = "pune" or "banglore" ;
++--------+--------+
+| name   | salary |
++--------+--------+
+| SURESH | 100000 |
+| SURESH | 100000 |
+| ROHIT  | 100000 |
+| ROHIT  | 100000 |
+| SUNITA |  70000 |
+| SUNITA |  70000 |
+| GAURI  |  80000 |
+| GAURI  |  80000 |
++--------+--------+
+8 rows in set, 1 warning (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and loc = "pune" or "banglore" or "chennai" ;
++--------+--------+
+| name   | salary |
++--------+--------+
+| SURESH | 100000 |
+| SURESH | 100000 |
+| ROHIT  | 100000 |
+| ROHIT  | 100000 |
+| SUNITA |  70000 |
+| SUNITA |  70000 |
+| GAURI  |  80000 |
+| GAURI  |  80000 |
++--------+--------+
+8 rows in set, 2 warnings (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and loc in ("pune", "banglore", "chennai") ;
++---------+--------+
+| name    | salary |
++---------+--------+
+| SURESH  | 100000 |
+| SURESH  | 100000 |
+| ROHIT   | 100000 |
+| ROHIT   | 100000 |
+| SUNITA  |  70000 |
+| SUNITA  |  70000 |
+| GAURI   |  80000 |
+| GAURI   |  80000 |
+| JEET    | 155000 |
+| JEET    | 155000 |
+| YOGESH  |  90000 |
+| SMRUTI  |  55000 |
+| PAYAL   |  72000 |
+| SWAPNIL |  97000 |
+| SHIRIN  |  50000 |
+| SOHAIL  |  50000 |
+| SURAJ   |  83000 |
++---------+--------+
+17 rows in set (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and loc in ("pune", "banglore", "chennai") ;
++---------+--------+
+| name    | salary |
++---------+--------+
+| SURESH  | 100000 |
+| SURESH  | 100000 |
+| ROHIT   | 100000 |
+| ROHIT   | 100000 |
+| SUNITA  |  70000 |
+| SUNITA  |  70000 |
+| GAURI   |  80000 |
+| GAURI   |  80000 |
+| JEET    | 155000 |
+| JEET    | 155000 |
+| YOGESH  |  90000 |
+| SMRUTI  |  55000 |
+| PAYAL   |  72000 |
+| SWAPNIL |  97000 |
+| SHIRIN  |  50000 |
+| SOHAIL  |  50000 |
+| SURAJ   |  83000 |
++---------+--------+
+17 rows in set (0.00 sec)
+
+select name, salary from ed_record e, dept d where e.deptno = d.deptno and dname like "c%";
++--------+--------+
+| name   | salary |
++--------+--------+
+| SURESH | 100000 |
+| SURESH | 100000 |
+| ROHIT  | 100000 |
+| ROHIT  | 100000 |
+| SUNITA |  70000 |
+| SUNITA |  70000 |
+| GAURI  |  80000 |
+| GAURI  |  80000 |
+| JEET   | 155000 |
+| JEET   | 155000 |
+| YOGESH |  90000 |
+| SMRUTI |  55000 |
+| PAYAL  |  72000 |
++--------+--------+
+13 rows in set (0.00 sec)
+
+select name, job, dname from ed_record e, dept d where e.deptno = d.deptno and job = "quality";
++---------+---------+------------+
+| name    | job     | dname      |
++---------+---------+------------+
+| SHALAKA | QUALITY | mechanical |
+| SHALAKA | QUALITY | mechanical |
+| SUNITA  | QUALITY | computer   |
+| SUNITA  | QUALITY | computer   |
+| SMRUTI  | QUALITY | civil      |
+| SOHAIL  | QUALITY | entc       |
++---------+---------+------------+
+6 rows in set (0.00 sec)
+
+select name, job, dname, loc from ed_record e, dept d where e.deptno = d.deptno and job = "quality";
++---------+---------+------------+----------+
+| name    | job     | dname      | loc      |
++---------+---------+------------+----------+
+| SHALAKA | QUALITY | mechanical | mumbai   |
+| SHALAKA | QUALITY | mechanical | mumbai   |
+| SUNITA  | QUALITY | computer   | pune     |
+| SUNITA  | QUALITY | computer   | pune     |
+| SMRUTI  | QUALITY | civil      | banglore |
+| SOHAIL  | QUALITY | entc       | chennai  |
++---------+---------+------------+----------+
+6 rows in set (0.00 sec)
+
+select * from ed_record e, dept d where e.deptno = d.deptno and dname = "computer";
++------+--------+------------+--------+------+--------+--------+----------+------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO | deptno | dname    | loc  |
++------+--------+------------+--------+------+--------+--------+----------+------+
+|  101 | SURESH | MANAGER    | 100000 | 5000 |     20 |     20 | computer | pune |
+|  101 | SURESH | MANAGER    | 100000 | 5000 |     20 |     20 | computer | pune |
+|  102 | ROHIT  | SALES      | 100000 | 5000 |     20 |     20 | computer | pune |
+|  102 | ROHIT  | SALES      | 100000 | 5000 |     20 |     20 | computer | pune |
+|  103 | SUNITA | QUALITY    |  70000 | 3000 |     20 |     20 | computer | pune |
+|  103 | SUNITA | QUALITY    |  70000 | 3000 |     20 |     20 | computer | pune |
+|  104 | GAURI  | OPERATIONS |  80000 | 3500 |     20 |     20 | computer | pune |
+|  104 | GAURI  | OPERATIONS |  80000 | 3500 |     20 |     20 | computer | pune |
++------+--------+------------+--------+------+--------+--------+----------+------+
+8 rows in set (0.00 sec)
+
+select * from ed_record e, dept d where e.deptno = d.deptno and dname = "computer" and job = "manager";
++------+--------+---------+--------+------+--------+--------+----------+------+
+| ID   | NAME   | JOB     | SALARY | COMM | DEPTNO | deptno | dname    | loc  |
++------+--------+---------+--------+------+--------+--------+----------+------+
+|  101 | SURESH | MANAGER | 100000 | 5000 |     20 |     20 | computer | pune |
+|  101 | SURESH | MANAGER | 100000 | 5000 |     20 |     20 | computer | pune |
++------+--------+---------+--------+------+--------+--------+----------+------+
+2 rows in set (0.00 sec)
+
+select * from ed_record e, dept d where e.deptno = d.deptno and job like"Q%" and dname like "c%";
++------+--------+---------+--------+------+--------+--------+----------+----------+
+| ID   | NAME   | JOB     | SALARY | COMM | DEPTNO | deptno | dname    | loc      |
++------+--------+---------+--------+------+--------+--------+----------+----------+
+|  103 | SUNITA | QUALITY |  70000 | 3000 |     20 |     20 | computer | pune     |
+|  103 | SUNITA | QUALITY |  70000 | 3000 |     20 |     20 | computer | pune     |
+|  111 | SMRUTI | QUALITY |  55000 | 2500 |     30 |     30 | civil    | banglore |
++------+--------+---------+--------+------+--------+--------+----------+----------+
+3 rows in set (0.00 sec)
+
+select name ,job, dname from ed_record e, dept d where e.deptno = d.deptno and job like"Q%" and dname like "c%";
++--------+---------+----------+
+| name   | job     | dname    |
++--------+---------+----------+
+| SUNITA | QUALITY | computer |
+| SUNITA | QUALITY | computer |
+| SMRUTI | QUALITY | civil    |
++--------+---------+----------+
+3 rows in set (0.00 sec)
+
+select name, loc from ed_record e, dept d where e.deptno = d.deptno;
++----------+------------+
+| name     | loc        |
++----------+------------+
+| SURESH   | pune       |
+| SURESH   | pune       |
+| ROHIT    | pune       |
+| ROHIT    | pune       |
+| SUNITA   | pune       |
+| SUNITA   | pune       |
+| GAURI    | pune       |
+| GAURI    | pune       |
+| SHRUTIKA | mumbai     |
+| SHRUTIKA | mumbai     |
+| SAHIL    | mumbai     |
+| SAHIL    | mumbai     |
+| SHALAKA  | mumbai     |
+| SHALAKA  | mumbai     |
+| MOHSIN   | mumbai     |
+| MOHSIN   | mumbai     |
+| JEET     | banglore   |
+| JEET     | banglore   |
+| YOGESH   | banglore   |
+| SMRUTI   | banglore   |
+| PAYAL    | banglore   |
+| SWAPNIL  | chennai    |
+| SHIRIN   | chennai    |
+| SOHAIL   | chennai    |
+| SURAJ    | chennai    |
+| GILL     | mp         |
+| SAURABH  | mp         |
+| ASHISH   | tamil_nadu |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select * from ed_record e, dept d where e.deptno = d.deptno and dname = "computer";
++------+--------+------------+--------+------+--------+--------+----------+------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO | deptno | dname    | loc  |
++------+--------+------------+--------+------+--------+--------+----------+------+
+|  101 | SURESH | MANAGER    | 100000 | 5000 |     20 |     20 | computer | pune |
+|  101 | SURESH | MANAGER    | 100000 | 5000 |     20 |     20 | computer | pune |
+|  102 | ROHIT  | SALES      | 100000 | 5000 |     20 |     20 | computer | pune |
+|  102 | ROHIT  | SALES      | 100000 | 5000 |     20 |     20 | computer | pune |
+|  103 | SUNITA | QUALITY    |  70000 | 3000 |     20 |     20 | computer | pune |
+|  103 | SUNITA | QUALITY    |  70000 | 3000 |     20 |     20 | computer | pune |
+|  104 | GAURI  | OPERATIONS |  80000 | 3500 |     20 |     20 | computer | pune |
+|  104 | GAURI  | OPERATIONS |  80000 | 3500 |     20 |     20 | computer | pune |
++------+--------+------------+--------+------+--------+--------+----------+------+
+8 rows in set (0.00 sec)
+
+select * from ed_record where deptno in (select deptno from dept where dname = "computer");
++------+--------+------------+--------+------+--------+
+| ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
++------+--------+------------+--------+------+--------+
+|  101 | SURESH | MANAGER    | 100000 | 5000 |     20 |
+|  102 | ROHIT  | SALES      | 100000 | 5000 |     20 |
+|  103 | SUNITA | QUALITY    |  70000 | 3000 |     20 |
+|  104 | GAURI  | OPERATIONS |  80000 | 3500 |     20 |
++------+--------+------------+--------+------+--------+
+4 rows in set (0.00 sec)
+
+select name, comm, dname from ed_record e, dept d where e.deptno = d.deptno and comm is null;
++------+------+-------+
+| name | comm | dname |
++------+------+-------+
+| GILL | NULL | it    |
++------+------+-------+
+1 row in set (0.00 sec)
+
+select name, comm, dname from ed_record e, dept d where e.deptno = d.deptno and comm is not null;
++----------+------+------------+
+| name     | comm | dname      |
++----------+------+------------+
+| SURESH   | 5000 | computer   |
+| SURESH   | 5000 | computer   |
+| ROHIT    | 5000 | computer   |
+| ROHIT    | 5000 | computer   |
+| SUNITA   | 3000 | computer   |
+| SUNITA   | 3000 | computer   |
+| GAURI    | 3500 | computer   |
+| GAURI    | 3500 | computer   |
+| SHRUTIKA | 4500 | mechanical |
+| SHRUTIKA | 4500 | mechanical |
+| SAHIL    | 3500 | mechanical |
+| SAHIL    | 3500 | mechanical |
+| SHALAKA  | 3500 | mechanical |
+| SHALAKA  | 3500 | mechanical |
+| MOHSIN   | 2500 | mechanical |
+| MOHSIN   | 2500 | mechanical |
+| JEET     | 4500 | civil      |
+| JEET     | 4500 | civil      |
+| YOGESH   | 3500 | civil      |
+| SMRUTI   | 2500 | civil      |
+| PAYAL    | 1500 | civil      |
+| SWAPNIL  | 3200 | entc       |
+| SHIRIN   | 1500 | entc       |
+| SOHAIL   | 2540 | entc       |
+| SURAJ    | 2700 | entc       |
+| SAURABH  |    0 | it         |
+| ASHISH   | 3700 | electric   |
++----------+------+------------+
+27 rows in set (0.00 sec)
+
+select name, comm, dname from ed_record e, dept d where e.deptno = d.deptno and comm > 0 ;
++----------+------+------------+
+| name     | comm | dname      |
++----------+------+------------+
+| MOHSIN   | 2500 | mechanical |
+| SHALAKA  | 3500 | mechanical |
+| SAHIL    | 3500 | mechanical |
+| SHRUTIKA | 4500 | mechanical |
+| MOHSIN   | 2500 | mechanical |
+| SHALAKA  | 3500 | mechanical |
+| SAHIL    | 3500 | mechanical |
+| SHRUTIKA | 4500 | mechanical |
+| GAURI    | 3500 | computer   |
+| SUNITA   | 3000 | computer   |
+| ROHIT    | 5000 | computer   |
+| SURESH   | 5000 | computer   |
+| GAURI    | 3500 | computer   |
+| SUNITA   | 3000 | computer   |
+| ROHIT    | 5000 | computer   |
+| SURESH   | 5000 | computer   |
+| PAYAL    | 1500 | civil      |
+| SMRUTI   | 2500 | civil      |
+| YOGESH   | 3500 | civil      |
+| JEET     | 4500 | civil      |
+| JEET     | 4500 | civil      |
+| SURAJ    | 2700 | entc       |
+| SOHAIL   | 2540 | entc       |
+| SHIRIN   | 1500 | entc       |
+| SWAPNIL  | 3200 | entc       |
+| ASHISH   | 3700 | electric   |
++----------+------+------------+
+26 rows in set (0.00 sec)
+
+select name, comm, dname from ed_record e, dept d where e.deptno = d.deptno and comm > 0 and e.deptno in (30,50,60,70);
++--------+------+----------+
+| name   | comm | dname    |
++--------+------+----------+
+| PAYAL  | 1500 | civil    |
+| SMRUTI | 2500 | civil    |
+| YOGESH | 3500 | civil    |
+| JEET   | 4500 | civil    |
+| JEET   | 4500 | civil    |
+| ASHISH | 3700 | electric |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+select name, dname from ed_record left join dept on ed_record.deptno = dept.deptno;
++----------+------------+
+| name     | dname      |
++----------+------------+
+| SURESH   | computer   |
+| SURESH   | computer   |
+| ROHIT    | computer   |
+| ROHIT    | computer   |
+| SUNITA   | computer   |
+| SUNITA   | computer   |
+| GAURI    | computer   |
+| GAURI    | computer   |
+| SHRUTIKA | mechanical |
+| SHRUTIKA | mechanical |
+| SAHIL    | mechanical |
+| SAHIL    | mechanical |
+| SHALAKA  | mechanical |
+| SHALAKA  | mechanical |
+| MOHSIN   | mechanical |
+| MOHSIN   | mechanical |
+| JEET     | civil      |
+| JEET     | civil      |
+| YOGESH   | civil      |
+| SMRUTI   | civil      |
+| PAYAL    | civil      |
+| SWAPNIL  | entc       |
+| SHIRIN   | entc       |
+| SOHAIL   | entc       |
+| SURAJ    | entc       |
+| GILL     | it         |
+| SAURABH  | it         |
+| ASHISH   | electric   |
++----------+------------+
+28 rows in set (0.00 sec)
+
+select name, dname from ed_record right join dept on ed_record.deptno = dept.deptno;
++----------+------------+
+| name     | dname      |
++----------+------------+
+| MOHSIN   | mechanical |
+| SHALAKA  | mechanical |
+| SAHIL    | mechanical |
+| SHRUTIKA | mechanical |
+| MOHSIN   | mechanical |
+| SHALAKA  | mechanical |
+| SAHIL    | mechanical |
+| SHRUTIKA | mechanical |
+| GAURI    | computer   |
+| SUNITA   | computer   |
+| ROHIT    | computer   |
+| SURESH   | computer   |
+| GAURI    | computer   |
+| SUNITA   | computer   |
+| ROHIT    | computer   |
+| SURESH   | computer   |
+| PAYAL    | civil      |
+| SMRUTI   | civil      |
+| YOGESH   | civil      |
+| JEET     | civil      |
+| JEET     | civil      |
+| SURAJ    | entc       |
+| SOHAIL   | entc       |
+| SHIRIN   | entc       |
+| SWAPNIL  | entc       |
+| SAURABH  | it         |
+| GILL     | it         |
+| ASHISH   | electric   |
+| NULL     | chemical   |
+| NULL     | education  |
+| NULL     | art        |
++----------+------------+
+31 rows in set (0.00 sec)
+
+select * from record1;
++------+--------+----------+
+| id   | name   | loc      |
++------+--------+----------+
+|    1 | Rohan  | pune     |
+|    2 | Sunil  | Mumbai   |
+|    3 | Anil   | channai  |
+|    4 | Sujato | banglore |
+|    5 | Manish | Pune     |
+|    6 | Ruchi  | Channai  |
++------+--------+----------+
+6 rows in set (0.00 sec)
+
+select * from proxy;
++------+--------+----------+
+| id   | name   | loc      |
++------+--------+----------+
+|    1 | Rohan  | pune     |
+|    2 | Sunil  | Mumbai   |
+|    3 | Anil   | channai  |
+|    4 | Sujato | banglore |
+|    5 | Manish | Pune     |
+|    6 | Ruchi  | Channai  |
++------+--------+----------+
+6 rows in set (0.01 sec)
+
+select * from proxy;
++------+---------+----------+
+| id   | name    | loc      |
++------+---------+----------+
+|    1 | Rohan   | pune     |
+|    2 | Sunil   | Mumbai   |
+|    3 | Anil    | channai  |
+|    4 | Sujato  | banglore |
+|    5 | Manish  | Pune     |
+|    6 | Ruchi   | Channai  |
+|    1 | Paratik | Pune     |
++------+---------+----------+
+7 rows in set (0.00 sec)    
+
+select * from record1;
++------+---------+----------+
+| id   | name    | loc      |
++------+---------+----------+
+|    1 | Rohan   | pune     |
+|    2 | Sunil   | Mumbai   |
+|    3 | Anil    | channai  |
+|    4 | Sujato  | banglore |
+|    5 | Manish  | Pune     |
+|    6 | Ruchi   | Channai  |
+|    1 | Paratik | Pune     |
++------+---------+----------+
+7 rows in set (0.00 sec)
+
+select * from record1;
++------+---------+----------+
+| id   | name    | loc      |
++------+---------+----------+
+|    1 | Rohan   | pune     |
+|    2 | Sunil   | Mumbai   |
+|    3 | Anil    | channai  |
+|    4 | Sujato  | banglore |
+|    5 | Manish  | Pune     |
+|    6 | Ruchi   | Channai  |
+|    1 | Paratik | Pune     |
++------+---------+----------+
+7 rows in set (0.00 sec)
+
+select * from proxy;
++------+---------+
+| id   | name    |
++------+---------+
+|    1 | Rohan   |
+|    2 | Sunil   |
+|    3 | Anil    |
+|    4 | Sujato  |
+|    5 | Manish  |
+|    6 | Ruchi   |
+|    1 | Paratik |
++------+---------+
+7 rows in set (0.00 sec)
+
+select * from record1 union select * from record2;
++------+---------+----------+
+| id   | name    | loc      |
++------+---------+----------+
+|    1 | Rohan   | pune     |
+|    2 | Sunil   | Mumbai   |
+|    3 | Anil    | channai  |
+|    4 | Sujato  | banglore |
+|    5 | Manish  | Pune     |
+|    6 | Ruchi   | Channai  |
+|    1 | Paratik | Pune     |
+|    7 | kiran   | Delhi    |
+|    9 | Rakesh  | Up       |
+|    4 | Suraj   | Banglore |
+|   10 | Shirin  | Mumbai   |
+|   11 | Jeet    | Madras   |
++------+---------+----------+
+12 rows in set (0.00 sec)
+
+select * from record2;
++------+--------+----------+
+| id   | name   | loc      |
++------+--------+----------+
+|    7 | kiran  | Delhi    |
+|    1 | Rohan  | Pune     |
+|    9 | Rakesh | Up       |
+|    3 | Anil   | Channai  |
+|    4 | Suraj  | Banglore |
+|   10 | Shirin | Mumbai   |
+|   11 | Jeet   | Madras   |
++------+--------+----------+
+7 rows in set (0.00 sec)
+
+
+
+```
