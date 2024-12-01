@@ -25,37 +25,51 @@ insert into ED_RECORD values(116,"SURAJ","OPERATIONS",83000,2700,40);
 insert into ED_RECORD values(117,"GILL","SALES",34000,NULL,50);
 insert into ED_RECORD values(118,"SAURABH","OPERATIONS",41200,0,50);
 insert into ED_RECORD values(119,"ASHISH","MANAGER",53470,3700,60);
+
 ```
 
 <!-- Add Clause in sql -->
-
 <!-- Add operators in sql -->
 
 ```sql
 -- 21|11|24 SMIT
+-- Dual Functions Like Operator
+-- Dual Functions use Dual Schema:
 use mysql;
+
+-- Lpad & Rpad Dual Functions:
 select lpad("code",8,'@');
 select lpad("max",8,'*');
 select rpad ( lpad("apple",9,'$'),12,'#');
 select rpad ( lpad("bye",6,'*'),10,'$');
 select rpad ( lpad("data",7,'#'),10,'&');
 select rpad ( lpad("code",8,'@'),10,'$');
-select * from ED_RECORD;
 select rpad(name,10,'$') from ED_RECORD;
 select rpad(name,10,'#'), lpad(job,10,'@') from ED_RECORD;
+
+-- Nested Lpad & Rpad Functions: rpad(lpad("code",9,"@"),15,"#");
+select rpad(lpad("code",9,"@"),15,"#");
++---------------------------------+
+| rpad(lpad("code",9,"@"),15,"#") |
++---------------------------------+
+| @@@@@code######                 |
++---------------------------------+
+
+-- Upper & Lower:
 select lower("ABCD") from dual;
 select upper("ABCD") from dual;
 select upper("name") from dual;
 select lower(name), lower(job) from ED_RECORD;
-select length("VISHAKHPATTANAM") from dual;
-select length(name), length(job) from ED_RECORD;    
-select length ("name")/2;
+
+-- Round:
 select round (2.8) from dual;
 select round (2.3) from dual;
 select round (-2.3) from dual;
 select round (-2.8) from dual;
 select avg(SALARY) from ED_RECORD;
 select round(avg(SALARY)) from ED_RECORD;
+
+-- Ceil & Floor:
 select ceil(2.1);
 select ceil(2.8);
 select floor(2.8);
@@ -63,8 +77,12 @@ select floor(2.9);
 select ceil(-2.9);
 select ceil(-9.9);
 select floor(-9.9);
+
+-- Reverse:
 select reverse("coding");
-select reverse("coding");
+select reverse("1234567890");
+
+-- Substring:
 select substr("vishkhapattanum",1);
 select substr("vishkhapattanum",-1);
 select substr("vishkhapattanum",1,5);
@@ -73,19 +91,30 @@ select substr("Pratik",1,length("Pratik")/2);
 select substr("Pratik",-length("Pratik")/2);
 select substr("Pratik",length("Pratik")/2);
 select substr("Pratik",length("Pratik")/2+1);
+
+-- Length
+select length("VISHAKHPATTANAM") from dual;
+select length(name), length(job) from ED_RECORD;    
+select length ("name")/2;
 select substr(name,length(name)/2+1), substr(job,-length(job)/2) from ED_RECORD;
 select substr(name,length(name)/2), substr(job,-length(job)/2) from ED_RECORD;
+
+-- Like Operator:
 select name from ED_RECORD where name like "A%";
 select name from ED_RECORD where name like "S%";
 select name from ED_RECORD where name like "%A";
 select name from ED_RECORD where name like "____";
 select name from ED_RECORD where name like "_H%";
+
+-- Two Consicutive EE:
 select name from ED_RECORD where name like "%EE%";
-<!-- escape charecters (they dosen't print on terminal) = % & __ -->
+<!-- Two escape charecters in Dual Functions: (they dosen't print on terminal) = % & __ -->
+
 ```
 
 ```sql 
 -- 25|11|24 SMIT
+-- Date & Time
 select sysdate();
 2024-11-25 16:32:47
 select date("2024-11-25");
@@ -142,7 +171,10 @@ select curtime(4);
 17:06:12.3775
 select curtime(6);
 17:06:18.044820
+
+-- Group
 select DEPTNO from ED_RECORD;
++--------+
 | DEPTNO |
 +--------+
 |     20 |
@@ -165,7 +197,9 @@ select DEPTNO from ED_RECORD;
 |     50 |
 |     50 |
 |     60 |
++--------+
 select DEPTNO from ED_RECORD group by DEPTNO;
++--------+
 | DEPTNO |
 +--------+
 |     20 |
@@ -174,37 +208,18 @@ select DEPTNO from ED_RECORD group by DEPTNO;
 |     40 |
 |     50 |
 |     60 |
++--------+
 select JOB from ED_RECORD group by JOB;
++------------+
 | JOB        |
 +------------+
 | MANAGER    |
 | SALES      |
 | QUALITY    |
 | OPERATIONS |
-select * from ED_RECORD;
-| ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
-+------+----------+------------+--------+------+--------+
-|  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
-|  102 | ROHIT    | SALES      | 100000 | 5000 |     20 |
-|  103 | SUNITA   | QUALITY    |  70000 | 3000 |     20 |
-|  104 | GAURI    | OPERATIONS |  80000 | 3500 |     20 |
-|  105 | SHRUTIKA | MANAGER    | 150000 | 4500 |     10 |
-|  106 | SAHIL    | SALES      | 130000 | 3500 |     10 |
-|  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
-|  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
-|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
-|  109 | JEET     | MANAGER    | 155000 | 4500 |     30 |
-|  110 | YOGESH   | SALES      |  90000 | 3500 |     30 |
-|  111 | SMRUTI   | QUALITY    |  55000 | 2500 |     30 |
-|  112 | PAYAL    | OPERATIONS |  72000 | 1500 |     30 |
-|  113 | SWAPNIL  | MANAGER    |  97000 | 3200 |     40 |
-|  114 | SHIRIN   | SALES      |  50000 | 1500 |     40 |
-|  115 | SOHAIL   | QUALITY    |  50000 | 2540 |     40 |
-|  116 | SURAJ    | OPERATIONS |  83000 | 2700 |     40 |
-|  117 | GILL     | SALES      |  34000 | NULL |     50 |
-|  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
-|  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
++------------+
 select count(ID), DEPTNO from ED_RECORD group by DEPTNO;
++-----------+--------+
 | count(ID) | DEPTNO |
 +-----------+--------+
 |         4 |     20 |
@@ -213,7 +228,9 @@ select count(ID), DEPTNO from ED_RECORD group by DEPTNO;
 |         4 |     40 |
 |         2 |     50 |
 |         1 |     60 |
++-----------+--------+
 select max(SALARY), DEPTNO from ED_RECORD group by DEPTNO;
++-------------+--------+
 | max(SALARY) | DEPTNO |
 +-------------+--------+
 |      100000 |     20 |
@@ -222,7 +239,9 @@ select max(SALARY), DEPTNO from ED_RECORD group by DEPTNO;
 |       97000 |     40 |
 |       41200 |     50 |
 |       53470 |     60 |
++-------------+--------+
 select min(COMM), DEPTNO from ED_RECORD group by DEPTNO;
++-----------+--------+
 | min(COMM) | DEPTNO |
 +-----------+--------+
 |      3000 |     20 |
@@ -231,7 +250,9 @@ select min(COMM), DEPTNO from ED_RECORD group by DEPTNO;
 |      1500 |     40 |
 |         0 |     50 |
 |      3700 |     60 |
++-----------+--------+
 select * from ED_RECORD;
++------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
 +------+----------+------------+--------+------+--------+
 |  101 | SURESH   | MANAGER    | 100000 | 5000 |     20 |
@@ -254,7 +275,9 @@ select * from ED_RECORD;
 |  117 | GILL     | SALES      |  34000 | NULL |     50 |
 |  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
 |  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
++------+----------+------------+--------+------+--------+
 select count(JOB), DEPTNO from ED_RECORD group by DEPTNO;
++------------+--------+
 | count(JOB) | DEPTNO |
 +------------+--------+
 |          4 |     20 |
@@ -263,7 +286,9 @@ select count(JOB), DEPTNO from ED_RECORD group by DEPTNO;
 |          4 |     40 |
 |          2 |     50 |
 |          1 |     60 |
++------------+--------+
 select count(SALARY), DEPTNO from ED_RECORD group by DEPTNO;
++---------------+--------+
 | count(SALARY) | DEPTNO |
 +---------------+--------+
 |             4 |     20 |
@@ -272,13 +297,16 @@ select count(SALARY), DEPTNO from ED_RECORD group by DEPTNO;
 |             4 |     40 |
 |             2 |     50 |
 |             1 |     60 |
++---------------+--------+
 select count(DEPTNO), JOB from ED_RECORD group by JOB;
-| count(DEPTNO) | JOB        |
++---------------+------------+
+| count(deptno) | job        |
 +---------------+------------+
 |             6 | MANAGER    |
 |             5 | SALES      |
 |             4 | QUALITY    |
 |             5 | OPERATIONS |
++---------------+------------+
 
 ```
 
@@ -481,7 +509,6 @@ select * from students;
 desc students;
 
 -- DQL
-
 use sqlsession;
 
 -- Insert 20 rows into the employee table
@@ -525,6 +552,7 @@ insert into autoincrementdemo (name) values
 ("Archana"),
 ("Nidhi");
 select * from autoincrementdemo;
+
 ```
 
 ```sql
@@ -598,6 +626,7 @@ select * from data3;
 delete from data3 where id = 1;
 delete from data3 where id = 2;
 select * from data3;
+
 ```
 
 ```sql
@@ -679,6 +708,7 @@ delete from student where marks < 33;
 delete from student; all data removed.
 
 -- foreign key:
+constraint std_fk1 foreign key(id) references stident(id);
 
 ```
 ```sql
@@ -787,6 +817,7 @@ select * from dept;
 |     90 | art        | rajasthan  |
 +--------+------------+------------+
 
+```
 
 
 ```sql
@@ -822,6 +853,7 @@ select * from dept;
 |     80 | education  | karnataka  |
 |     90 | art        | rajasthan  |
 +--------+------------+------------+
+
 select * from ed_record;
 select name from ed_record where deptno in (select deptno from dept where dname like "%c");
 select deptno from ed_record where name = "swapnil";
@@ -842,7 +874,9 @@ select select * from dept;
 select name from ed_record where deptno in (select deptno from dept where dname = "mechanical");
 select name from ed_record where name = "gill";
 select * from ed_record where deptno in (select deptno from dept where loc in (select loc from dept where deptno in (select deptno from ed_record where name="gill")));
+
 ```
+
 # Assignment_1:
 ```sql FG
 -- 29|11|24
@@ -954,7 +988,6 @@ values
 -- update students set name="krishna" where id=20;
 update Books set publication_year = '1970-12-12' where book_id = 101;
 
-
 -- Q.5. Delete a member from the Members table.
 delete from Members where member_id = 201;
 -- Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`library_management`.`borrowed_books`, CONSTRAINT `member_id_fk` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`)) ❌->
@@ -1046,6 +1079,7 @@ show databases;
 | sys                |
 | world              |
 +--------------------+
+
 use library_management;
 show tables;
 +------------------------------+
@@ -1055,6 +1089,7 @@ show tables;
 | borrowed_books               |
 | members                      |
 +------------------------------+
+
 select * from books;
 +---------+------------------+---------------------+------------------+-----------+------------------+-----------+
 | book_id | title            | author              | publication_year | genre     | available_copies | publisher |
@@ -1064,6 +1099,7 @@ select * from books;
 |     104 | PridePrejudice   | Jane Austen         | 1813-12-12       | Romance   |                7 | NULL      |
 |     105 | Catcher the Rye  | J.D. Salinger       | 1951-12-12       | Fiction   |                2 | NULL      |
 +---------+------------------+---------------------+------------------+-----------+------------------+-----------+
+
 select * from members;
 +-----------+---------------+--------------------------+--------------+-----------------------+---------------------+
 | member_id | name          | address                  | phone_number | membership_start_date | membership_end_date |
@@ -1072,6 +1108,7 @@ select * from members;
 |       202 | Jane Smith    | 456 Oak St, Metropolis   |        -6975 | 2023-03-15            | 2024-03-15          |
 |       203 | Alice Johnson | 789 Pine St, Gotham City |        -7791 | 2022-11-10            | 2023-11-10          |
 +-----------+---------------+--------------------------+--------------+-----------------------+---------------------+
+
 select * from borrowed_books;
 +-----------+---------+-----------+-------------+------------+-------------+
 | borrow_id | book_id | member_id | borrow_date | due_date   | return_date |
@@ -1080,6 +1117,7 @@ select * from borrowed_books;
 |       303 |     103 |       203 | 2024-11-03  | 2024-11-17 | 2024-11-17  |
 |       304 |     104 |       201 | 2024-11-04  | 2024-11-18 | 2024-11-18  |
 +-----------+---------+-----------+-------------+------------+-------------+
+
 ```
 
 ```sql
@@ -1100,7 +1138,9 @@ show databases;
 | sys                |
 | world              |
 +--------------------+
+
 use mysql;
+
 show tables;
 +------------------------------------------------------+
 | Tables_in_mysql                                      |
@@ -1147,6 +1187,7 @@ show tables;
 | time_zone_transition_type                            |
 | user                                                 |
 +------------------------------------------------------+
+
 select * from ed_record;
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -1172,6 +1213,7 @@ select * from ed_record;
 |  118 | SAURABH  | OPERATIONS |  41200 |    0 |     50 |
 |  119 | ASHISH   | MANAGER    |  53470 | 3700 |     60 |
 +------+----------+------------+--------+------+--------+
+
 select * from dept;
 +--------+------------+------------+
 | deptno | dname      | loc        |
@@ -1188,6 +1230,7 @@ select * from dept;
 |     80 | education  | karnataka  |
 |     90 | art        | rajasthan  |
 +--------+------------+------------+
+
 select * from ed_record where deptno = "10";
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -1197,12 +1240,14 @@ select * from ed_record where deptno = "10";
 |  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
 |  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
 +------+----------+------------+--------+------+--------+
+
 select deptno from ed_record where name = "shrutika";
 +--------+
 | deptno |
 +--------+
 |     10 |
 +--------+
+
 select loc from dept where deptno in(select deptno from ed_record where name = "shrutika");
 +--------+
 | loc    |
@@ -1210,6 +1255,7 @@ select loc from dept where deptno in(select deptno from ed_record where name = "
 | mumbai |
 | mumbai |
 +--------+
+
 select loc from dept where deptno in(select deptno from ed_record where name = "shrutika");
 +--------+
 | loc    |
@@ -1217,6 +1263,7 @@ select loc from dept where deptno in(select deptno from ed_record where name = "
 | mumbai |
 | mumbai |
 +--------+
+
 select deptno from dept where loc in(select loc from dept where deptno in(select deptno from ed_record where name = "shrutika"));
 +--------+
 | deptno |
@@ -1224,6 +1271,7 @@ select deptno from dept where loc in(select loc from dept where deptno in(select
 |     10 |
 |     10 |
 +--------+
+
 select * from ed_record where deptno in (select deptno from dept where loc in(select loc from dept where deptno in(select deptno from ed_record where name = "shrutika")));
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -1233,6 +1281,7 @@ select * from ed_record where deptno in (select deptno from dept where loc in(se
 |  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
 |  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
 +------+----------+------------+--------+------+--------+
+
 select * from ed_record where deptno in (select deptno from dept where loc in(select loc from dept where deptno in(select deptno from ed_record where name = "shrutika")));
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -1242,12 +1291,14 @@ select * from ed_record where deptno in (select deptno from dept where loc in(se
 |  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
 |  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
 +------+----------+------------+--------+------+--------+
+
 select * from ed_record where name = "smruti";
 +------+--------+---------+--------+------+--------+
 | ID   | NAME   | JOB     | SALARY | COMM | DEPTNO |
 +------+--------+---------+--------+------+--------+
 |  111 | SMRUTI | QUALITY |  55000 | 2500 |     30 |
 +------+--------+---------+--------+------+--------+
+
 select * from ed_record where job != (select job from ed_record where name = "smruti") and salary > (select salary from ed_record where name = "rohit");
 +------+----------+---------+--------+------+--------+
 | ID   | NAME     | JOB     | SALARY | COMM | DEPTNO |
@@ -1257,18 +1308,21 @@ select * from ed_record where job != (select job from ed_record where name = "sm
 |  109 | JEET     | MANAGER | 155000 | 4500 |     30 |
 |  109 | JEET     | MANAGER | 155000 | 4500 |     30 |
 +------+----------+---------+--------+------+--------+
+
 (select salary from ed_record where name = "saurabh");
 +--------+
 | salary |
 +--------+
 |  41200 |
 +--------+
+
 select * from ed_record where name = "gauri";
 +------+-------+------------+--------+------+--------+
 | ID   | NAME  | JOB        | SALARY | COMM | DEPTNO |
 +------+-------+------------+--------+------+--------+
 |  104 | GAURI | OPERATIONS |  80000 | 3500 |     20 |
 +------+-------+------------+--------+------+--------+
+
 select deptno from ed_record where deptno in (select deptno from ed_record where name = "gauri");
 +--------+
 | deptno |
@@ -1278,6 +1332,7 @@ select deptno from ed_record where deptno in (select deptno from ed_record where
 |     20 |
 |     20 |
 +--------+
+
 select * from dept where dname = "computer";
 +--------+----------+------+
 | deptno | dname    | loc  |
@@ -1285,6 +1340,7 @@ select * from dept where dname = "computer";
 |     20 | computer | pune |
 |     20 | computer | pune |
 +--------+----------+------+
+
 select * from dept where dname = "mechanical";
 +--------+------------+--------+
 | deptno | dname      | loc    |
@@ -1292,6 +1348,7 @@ select * from dept where dname = "mechanical";
 |     10 | mechanical | mumbai |
 |     10 | mechanical | mumbai |
 +--------+------------+--------+
+
 select * from ed_record where deptno in (select deptno from dept where dname in ("computer", "mechanical"));
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -1305,6 +1362,7 @@ select * from ed_record where deptno in (select deptno from dept where dname in 
 |  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
 |  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
 +------+----------+------------+--------+------+--------+
+
 select * from ed_record where name = "jeet";
 +------+------+---------+--------+------+--------+
 | ID   | NAME | JOB     | SALARY | COMM | DEPTNO |
@@ -1312,6 +1370,7 @@ select * from ed_record where name = "jeet";
 |  109 | JEET | MANAGER | 155000 | 4500 |     30 |
 |  109 | JEET | MANAGER | 155000 | 4500 |     30 |
 +------+------+---------+--------+------+--------+
+
 select * from ed_record where deptno in (select deptno from ed_record where name = "jeet");
 +------+--------+------------+--------+------+--------+
 | ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
@@ -1322,6 +1381,7 @@ select * from ed_record where deptno in (select deptno from ed_record where name
 |  111 | SMRUTI | QUALITY    |  55000 | 2500 |     30 |
 |  112 | PAYAL  | OPERATIONS |  72000 | 1500 |     30 |
 +------+--------+------------+--------+------+--------+
+
 select * from ed_record where deptno in (select deptno from dept where dname in ("computer", "mechanical"));
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -1335,6 +1395,7 @@ select * from ed_record where deptno in (select deptno from dept where dname in 
 |  107 | SHALAKA  | QUALITY    |  64000 | 3500 |     10 |
 |  108 | MOHSIN   | OPERATIONS |  55000 | 2500 |     10 |
 +------+----------+------------+--------+------+--------+
+
 select * from ed_record where deptno in (select deptno from ed_record where name = "jeet");
 +------+--------+------------+--------+------+--------+
 | ID   | NAME   | JOB        | SALARY | COMM | DEPTNO |
@@ -1345,42 +1406,49 @@ select * from ed_record where deptno in (select deptno from ed_record where name
 |  111 | SMRUTI | QUALITY    |  55000 | 2500 |     30 |
 |  112 | PAYAL  | OPERATIONS |  72000 | 1500 |     30 |
 +------+--------+------------+--------+------+--------+
+
 select deptno from dept where dname = "entc";
 +--------+
 | deptno |
 +--------+
 |     40 |
 +--------+
+
 select deptno from dept where deptno in (select deptno from dept where dname = "entc");
 +--------+
 | deptno |
 +--------+
 |     40 |
 +--------+
+
 select max(salary) deptno from ed_record where deptno in (select deptno from dept where deptno in (select deptno from dept where dname = "entc"));
 +--------+
 | deptno |
 +--------+
 |  97000 |
 +--------+
+
 select max(salary) from ed_record where deptno in (select deptno from dept where dname = "entc");
 +-------------+
 | max(salary) |
 +-------------+
 |       97000 |
 +-------------+
+
 select min(salary) from ed_record where deptno in (select deptno from dept where dname = "entc");
 +-------------+
 | min(salary) |
 +-------------+
 |       50000 |
 +-------------+
+
 select min(salary) from ed_record where deptno in (select deptno from dept where dname = "entc");
 +-------------+
 | min(salary) |
 +-------------+
 |       50000 |
 +-------------+
+
 select * from  ed_record where salary in (select min(salary) from ed_record where deptno in (select deptno from dept where dname = "entc"));
 +------+--------+---------+--------+------+--------+
 | ID   | NAME   | JOB     | SALARY | COMM | DEPTNO |
@@ -1388,6 +1456,7 @@ select * from  ed_record where salary in (select min(salary) from ed_record wher
 |  114 | SHIRIN | SALES   |  50000 | 1500 |     40 |
 |  115 | SOHAIL | QUALITY |  50000 | 2540 |     40 |
 +------+--------+---------+--------+------+--------+
+
 ```
 
 ```sql
@@ -1841,6 +1910,7 @@ desc chini;
 | email  | varchar(25) | NO   |     | NULL    |       |
 +--------+-------------+------+-----+---------+-------+
 5 rows in set (0.02 sec)
+
 ```
 
 ```sql
@@ -1849,7 +1919,6 @@ desc chini;
 -- Clause:-Rules
 -- 1.Where-->Condition
 -- 2.Group By-->Grouping and Returns result as per group.
-
 select * from ed_record;
 +------+----------+------------+--------+------+--------+
 | ID   | NAME     | JOB        | SALARY | COMM | DEPTNO |
@@ -2040,7 +2109,9 @@ SELECT COUNT(ID),JOB FROM ED_RECORD WHERE SALARY>=100000 GROUP BY JOB;
 |         2 | SALES   |
 +-----------+---------+
 2 rows in set (0.00 sec) 
+
 ```
+
 ```sql
 -- 30|11|24
 use mysql;
@@ -3386,7 +3457,5 @@ select * from record2;
 |   11 | Jeet   | Madras   |
 +------+--------+----------+
 7 rows in set (0.00 sec)
-
-
 
 ```
