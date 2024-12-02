@@ -1,4 +1,4 @@
-# mysql>
+# mysql Notes:
 - Data: Logic Absent | Not Logically Processes | Conclusion is Not Present | Present in Row Format.
 - Infromation: Logically Process | Logic is Present | Conclusion is Possible | SQL queries.
 - SQL - Mical Widenius - Data Sientiest - later Acquire by Oracle | It is Not Case Sensitive.
@@ -62,7 +62,7 @@
     - Bitwise:
         - &(BItwiseAnd), |(BitwiseOr)  
         
-# MySQL Notes: 
+# MySQL Codes: 
 ```sql
 -- 18|11|24 APANA COLLAGE
 create database collage;
@@ -78,6 +78,82 @@ insert into student values (1,"Aman",26);
 insert into student values (1,"Shradha",24);
 
 select * from student;
+
+-- DataBase Related Queries:
+-- create database db_name;
+-- create database if not exist db_name;
+Create Database if not exist collage;
+
+-- Drop database db_name;
+drop database if exists db_name;
+
+-- Show Databases
+show databases;
+
+-- Table Related Queries:
+-- Create:
+-- create table table_name(column_name1 datatype constraint, column_name2 datatype constraint);
+create table student(rollno int primary key, name varchar(20));
+
+-- Select And View all column:
+select * from student;
+
+-- Insert:
+Insert into table_name(col1_v1, col2_v1), (col2_v2, col2_v2);
+
+-- Practice Questions:
+create table xyz_company;
+use xyz_company;
+create table employee(id int primary key, name varchar(20), salary int);
+insert into employee values(101, "adam", 25000),(2, "bob", 30000),(103, "casey", 40000);
+select * from employee;
+
+-- Keys:
+-- Primary Keys:
+-- It is a column (or set of columns) in a table that uniquely identifies each row. (a unique id)
+-- Thereis only 1Pk & it Should be Not Null.
+
+-- Foreign Key:
+-- A Foreign key is a column (or set of columns) in a table that refers to the rpimary key in another table.
+-- there can be multiple FK's.
+-- FK's can have duplicate & null values.
+
+-- Constraints:
+-- SQl commands are used to specify rues for data in a table.
+
+-- Not Null: Column cannot have  a null vaue
+col1 int not null
+
+-- Unique: all values in column are diffrent.
+col2 int unique
+
+-- primary key: makesa column unique & not null but used only for one.
+-- id int primary key
+create table temp(id int not null, primary key(id));
+
+-- Foreign key: Prevent actions that would destroy links between tables 
+create table temp(cust_id int, foreign key(cust_id) references customer(id));
+
+-- Default: Sets the Default Value of a Column.
+salary int default 25000
+
+-- Check: It can Limit the values allowed in a column
+create table city(id int primary key, city varchar(20), age int, constraint age_check check (age>=18 and city = "Delhi"));
+create table newTab(age int check(age >= 18));
+
+-- Create a Sample Table:
+create database college;
+use collage;
+create table student(rollno int primary key, name varchar(20), marks int not null, grade char, city varchar(20));
+-- Insert this Data:
+insert into student
+(rollno, name, marks, grade, city) 
+values
+(101, "Anil", 78, "B", "Pune"),
+(102, "Rohan", 80, "A", "Mumbai"),
+(103, "Kranti", 58, "C", "Nagar"),
+(104, "Khushi", 39, "D", "Pune"),
+(105, "Nikita", 50, "C", "Bhivandi");
 
 -- 28|11|24 APANA COLLAGE
 -- select: use to select data from the database
